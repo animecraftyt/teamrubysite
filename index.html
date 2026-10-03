@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Ruby</title>
     <style>
         body {
@@ -102,6 +103,65 @@
             border-radius: 8px;
             cursor: pointer;
             z-index: 2000;
+        }
+
+        .gallery img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 600px) {
+            .header-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .header-bar img {
+                height: 80px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+                padding: 4px;
+            }
+
+            .content {
+                padding-top: 200px;
+            }
+
+            .section-box {
+                width: 95%;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            iframe {
+                width: 100% !important;
+                height: auto;
+            }
+
+            #music-toggle {
+                padding: 8px 12px;
+                font-size: 14px;
+                bottom: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -385,6 +445,7 @@
 
 </body>
 </html>
+
 
 
 
