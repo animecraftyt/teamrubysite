@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Team Ruby</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("assets/pictures/codebg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Bar */
+        .header-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            padding: 5px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+            height: 120px;
+        }
+
+        .header-bar img {
+            height: 150px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            color: #b30000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 8px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Page Content */
+        .content {
+            padding-top: 180px;
+        }
+
+        h1 {
+            color: #b30000;
+        }
+        h2 {
+            color: #b30000;
+            margin-top: 40px;
+        }
+        p {
+            font-size: 18px;
+        }
+        .section-box {
+            background: rgba(255, 255, 255, 0.9);
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            font-size: 18px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .gallery img {
+            width: 200px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        /* Music Toggle Button */
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #b30000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 2000;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER BAR -->
+    <div class="header-bar">
+        <img src="assets/pictures/logo.png" alt="Team Ruby Logo">
+        <div class="nav-links">
+            <a href="#devlogs">Devlogs</a>
+            <a href="#games">Games</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About Us</a>
+            <a href="#gameslist">Our Games</a>
+            <a href="#unexpectedhonk">Unexpected Honk</a>
+            <a href="#stickman">Stickman Adventure</a>
+            <a href="#oldsites">Old Sites</a>
+            <a href="#whyupgrade">Why I Upgraded</a>
+        </div>
+    </div>
+
+    <!-- MUSIC TOGGLE -->
+    <button id="music-toggle">Play Music</button>
+    <audio id="bg-music" src="assets/audio/main-music.mp3" loop></audio>
+
+    <div class="content">
+
+        <h1>Welcome to Team Ruby!</h1>
+        <p>We’re a small indie group creating colorful, retro‑inspired games with big personality. From first‑person chicken battles to platforming adventures and quirky experiments, Team Ruby is all about fun ideas, creative worlds, and projects made with passion. Explore our games, follow our progress, and enjoy the journey!</p>
+
+        <!-- Devlogs Section -->
+        <h2 id="devlogs">Devlogs</h2>
+
+        <div class="section-box">
+            <h3>Original Games</h3>
+            <ul>
+                <li><strong>Stickman Adventure</strong> – Devlog coming soon.</li>
+                <li><strong>Unexpected Honk Has Occurred</strong> – Devlog coming soon.</li>
+                <li><strong>Chicken Shooter 64</strong> – Devlog coming soon.</li>
+            </ul>
+        </div>
+
+        <div class="section-box">
+            <h3>Fan Games</h3>
+            <ul>
+                <li><strong>Amy’s Epic Adventure</strong> – Devlog coming soon.</li>
+            </ul>
+        </div>
+
+        <!-- Games Section -->
+        <h2 id="games">Games</h2>
+
+        <!-- Original Games -->
+        <div class="section-box">
+            <h3>Original Games</h3>
+            <ul>
+                <li><a href="#stickman">Stickman Adventure</a></li>
+                <li><a href="#unexpectedhonk">Unexpected Honk Has Occurred</a></li>
+                <li><a href="#chickenshooter">Chicken Shooter 64</a></li>
+            </ul>
+        </div>
+
+        <!-- Fan Games -->
+        <div class="section-box">
+            <h3>Fan Games</h3>
+            <ul>
+                <li><a href="#games">Amy’s Epic Adventure</a></li>
+            </ul>
+        </div>
+
+        <!-- Amy’s Epic Adventure Section -->
+        <div class="section-box" id="games">
+            <h2>Amy’s Epic Adventure</h2>
+
+            <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Content:</strong> Mild Fantasy Violence, Comical Shenanigans</p>
+
+            <h3>Controls</h3>
+            <ul>
+                <li>Arrow Keys – Move</li>
+                <li>Z / X / C – Jump and abilities</li>
+                <li>P – Pause</li>
+            </ul>
+
+            <h3>Status</h3>
+            <p>Amy and the boss fight are not ready yet.</p>
+            <p>Finishing Fallen Frontier Zone does not give a trophy yet.</p>
+            <p><em>Zone trophy coming next update.</em></p>
+
+            <h3>Soundtrack</h3>
+            <p>
+                <a href="https://drive.google.com/file/d/1KNocnhA2-tJUfSKqTl6JAy-WnFwdB6IJ/view?usp=drivesdk" target="_blank">
+                    Click here to listen to the soundtrack
+                </a>
+            </p>
+
+            <h3>Description</h3>
+            <p>A normal fan game starring Amy Rose.</p>
+
+            <h3>Download it for free via the GameJolt Widget</h3>
+            <iframe src="https://widgets.gamejolt.com/package/v1?key=VF4hKXFP" frameborder="0" width="500" height="245"></iframe>
+        </div>
+
+        <!-- Chicken Shooter 64 Section -->
+        <div class="section-box" id="chickenshooter">
+            <h2>Chicken Shooter 64</h2>
+
+            <p><strong>Genre:</strong> First‑Person Shooter</p>
+            <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Content:</strong> Fantasy Violence, Comical Shenanigans</p>
+
+            <h3>Trailer</h3>
+            <iframe title="vimeo-player" 
+                    src="https://player.vimeo.com/video/1228200794?h=ba91138ea7" 
+                    width="640" height="360" frameborder="0"
+                    allowfullscreen>
+            </iframe>
+
+            <h3>Description</h3>
+            <p>Meet Mira Bluetail — the cheerful fox heroine of a world gone to war! When a flock of chickens suddenly arm themselves with knives and declare war on the world, Mira grabs her trusty shotgun and leaps into the action.</p>
+
+            <p>Explore bright, blocky landscapes, dodge wild chicken attacks, and blast through waves of feathery foes in fast, silly, over‑the‑top battles.</p>
+
+            <p><em>Grab a copy at your local video game store to find out!</em></p>
+
+            <h3>Download it for free via the GameJolt Widget</h3>
+            <iframe src="https://widgets.gamejolt.com/package/v1?key=wopDcnxz" 
+                    frameborder="0" width="500" height="245">
+            </iframe>
+        </div>
+
+        <!-- Unexpected Honk Has Occurred Section -->
+        <div class="section-box" id="unexpectedhonk">
+            <h2>Unexpected Honk Has Occurred</h2>
+
+            <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Genre:</strong> Visual Novel</p>
+
+            <h3>Description</h3>
+            <p>
+                <em>Unexpected Honk Has Occurred</em> is a short, experimental visual novel created by Team Ruby using Ren’Py.  
+                This demo was made in just 3 days, so expect something small, weird, glitchy… and a little chaotic.
+            </p>
+
+            <p>
+                You begin the game normally, choosing your name and preparing to play — until a strange “Goose Virus” takes over your screen.  
+                Before you can react, an AI named <strong>[redacted]</strong> appears, trying to stop the corruption before it spreads to your game.
+            </p>
+
+            <p>But the Goose Virus doesn’t want to let go.</p>
+
+            <h3>Your Choice</h3>
+            <ul>
+                <li>Try to help her delete the Goose Virus</li>
+                <li>Say nothing and let the game close itself</li>
+            </ul>
+
+            <p>Your decision determines whether the loop continues… or breaks.</p>
+
+            <h3>Features</h3>
+            <ul>
+                <li>A short interactive story</li>
+                <li>Glitch effects and corrupted visuals</li>
+                <li>Two endings (Good Ending & Bad Ending)</li>
+                <li>More content and a full story planned for future updates</li>
+            </ul>
+
+            <p>Thank you for playing, supporting Team Ruby, and being part of the loop.  
+            <strong>Can you break it?</strong></p>
+
+            <h3>Download via GameJolt</h3>
+            <iframe src="https://widgets.gamejolt.com/package/v1?key=mjtHi88j" 
+                    frameborder="0" width="500" height="245"></iframe>
+        </div>
+
+        <!-- Stickman Adventure Section -->
+        <div class="section-box" id="stickman">
+            <h2>Stickman Adventure</h2>
+
+            <p><strong>Genre:</strong> Open‑World Platformer</p>
+            <p><strong>Rating:</strong> All Ages</p>
+
+            <h3>Description</h3>
+            <p>
+                Step into a retro open‑world journey! Explore vast interconnected regions, from rugged mountains and mysterious forests to a city and hidden caves.  
+                Make choices that shape your path, discover secret codes left in the prototype and demo, and test your survival skills in a classic 8‑bit handheld adventure.
+            </p>
+
+            <h3>Features</h3>
+            <ul>
+                <li><strong>Explore an Open World:</strong> Choose your own paths, travel between unique areas like the mountains and woods, and uncover hidden routes.</li>
+                <li><strong>Secrets & Modes:</strong> Track down hidden codes in the prototype and demo to unlock secret modes and custom features!</li>
+                <li><strong>Secret Mode Hint:</strong> The prototype has 2 codes — use both to unlock infinite lives and no timer. This mode is called <em>Easy Mode</em>.</li>
+                <li><strong>Save & Load:</strong> Save and load anytime by returning to the title screen. (Will be replaced by auto‑saving.)</li>
+            </ul>
+
+            <h3>Download via GameJolt</h3>
+            <iframe src="https://widgets.gamejolt.com/package/v1?key=pDoyZk6r" 
+                    frameborder="0" width="500" height="245"></iframe>
+        </div>
+
+        <!-- About Section -->
+        <h2 id="about">About Team Ruby</h2>
+        <div class="section-box">
+            <p>Team Ruby is a small indie game development group creating fun, retro‑inspired projects. We focus on low‑poly or 2D worlds, with simple or hard gameplay, and creative ideas that feel like classic games with a modern twist.</p>
+
+            <p>Our current projects include Chicken Shooter 64, Amy’s Epic Adventure, Paper Sonic the Hedgehog, Unexpected Honk Has Occurred, and Stickman Adventure.</p>
+
+            <p>We’re all about experimenting, learning, and making games that are colorful, weird, and full of personality.</p>
+        </div>
+
+        <!-- Gallery Section -->
+        <h2 id="gallery">Game Gallery</h2>
+        <div class="section-box gallery">
+            <p>Gallery images will go here.</p>
+        </div>
+
+        <!-- Games List -->
+        <h2 id="gameslist">All Games</h2>
+        <div class="section-box">
+            <ul>
+                <li><strong>Original Games</strong></li>
+                <li>Stickman Adventure</li>
+                <li>Unexpected Honk Has Occurred</li>
+                <li>Chicken Shooter 64</li>
+
+                <br>
+
+                <li><strong>Fan Games</strong></li>
+                <li>Amy’s Epic Adventure</li>
+            </ul>
+        </div>
+
+        <!-- Old Sites Section -->
+        <h2 id="oldsites">Old Site Versions</h2>
+        <div class="section-box">
+            <p>Check out the older versions of the Team Ruby website:</p>
+
+            <p><strong>Old Site Version 2:</strong><br>
+            <a href="https://6aa1d3285f602.site123.me/" target="_blank">
+                https://6aa1d3285f602.site123.me/
+            </a></p>
+
+            <p><strong>Old Site Version 1:</strong><br>
+            <a href="https://animecraft64ytpage.tiiny.site/" target="_blank">
+                https://animecraft64ytpage.tiiny.site/
+            </a></p>
+        </div>
+
+        <!-- Why I Upgraded Section -->
+        <h2 id="whyupgrade">Why I Upgraded the Site</h2>
+        <div class="section-box">
+            <p><strong>Old Site Version 1</strong> was my very first test. I wanted to see if I could make a website for myself, long before Team Ruby existed. It was simple, but it helped me learn how websites work.</p>
+
+            <p><strong>Old Site Version 2</strong> was me trying something bigger. It had achievements, a CRT filter, and more features, but the limits of the platform didn’t feel right for what I wanted. Even with the cool effects, it wasn’t flexible enough.</p>
+
+            <p>This new site is the one I’m proud of. It’s cleaner, bigger, and built the way I want. Hopefully, this will be the last time I remake the Team Ruby website — and the version I stick with as the team grows.</p>
+        </div>
+
+    </div>
+
+    <!-- MUSIC SCRIPT -->
+    <script>
+        const music = document.getElementById("bg-music");
+        const toggle = document.getElementById("music-toggle");
+        let playing = false;
+
+        toggle.addEventListener("click", () => {
+            if (!playing) {
+                music.play();
+                toggle.textContent = "Pause Music";
+                playing = true;
+            } else {
+                music.pause();
+                toggle.textContent = "Play Music";
+                playing = false;
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
