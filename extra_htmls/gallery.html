@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("../assets/pictures/codebg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #111;
+            overflow-x: hidden;
+        }
+
+        .header-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            padding: 5px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+            height: 120px;
+        }
+
+        .header-bar img {
+            height: 150px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            color: #b30000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 8px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding-top: 180px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 60px;
+        }
+
+        h1 {
+            color: #b30000;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #b30000;
+            margin-top: 40px;
+        }
+
+        .section-box {
+            background: rgba(255, 255, 255, 0.9);
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .section-box h2 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+
+        .section-box p {
+            margin: 8px 0;
+            font-size: 18px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            max-height: 420px;
+            object-fit: contain;
+            border-radius: 8px;
+            border: 2px solid #b30000;
+            background: rgba(0,0,0,0.05);
+            display: block;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-empty {
+            color: #555;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 3px solid #fff;
+            background: #000;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 40px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #b30000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #b30000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 2000;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .header-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 8px;
+                gap: 8px;
+                box-sizing: border-box;
+            }
+
+            .header-bar img {
+                height: 70px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+                padding: 4px 6px;
+            }
+
+            .content {
+                padding-top: 185px;
+                padding-left: 10px;
+                padding-right: 10px;
+                box-sizing: border-box;
+            }
+
+            .section-box {
+                width: 92%;
+                padding: 15px 12px;
+                box-sizing: border-box;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .section-box h2 {
+                font-size: 22px;
+            }
+
+            .section-box p {
+                font-size: 16px;
+            }
+
+            #music-toggle {
+                padding: 8px 12px;
+                font-size: 14px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <img src="../assets/pictures/logo.png" alt="Team Ruby Logo">
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+        </div>
+    </div>
+
+    <button id="music-toggle">Play Music</button>
+    <audio id="bg-music" src="../assets/audio/main-music.mp3" loop></audio>
+
+    <div class="content">
+        <a class="home-link" href="../index.html">← Back to Home</a>
+        <h1>Gallery</h1>
+
+        <div class="section-box">
+            <h2>Amy’s Epic Adventure</h2>
+            <div class="gallery-grid">
+                <img src="../assets/pictures/gallery/amy/amy1.png" alt="Amy's Epic Adventure screenshot 1">
+                <img src="../assets/pictures/gallery/amy/amy2.png" alt="Amy's Epic Adventure screenshot 2">
+                <img src="../assets/pictures/gallery/amy/amy3.png" alt="Amy's Epic Adventure screenshot 3">
+                <img src="../assets/pictures/gallery/amy/amy4.png" alt="Amy's Epic Adventure screenshot 4">
+                <img src="../assets/pictures/gallery/amy/amy5.png" alt="Amy's Epic Adventure screenshot 5">
+                <img src="../assets/pictures/gallery/amy/amy6.png" alt="Amy's Epic Adventure screenshot 6">
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Chicken Shooter 64</h2>
+            <div class="gallery-grid">
+                <img src="../assets/pictures/gallery/chicken/chicken1.png" alt="Chicken Shooter 64 screenshot 1">
+                <img src="../assets/pictures/gallery/chicken/boxart.png" alt="Chicken Shooter 64 box art">
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Unexpected Honk Has Occurred</h2>
+            <p class="gallery-empty">Pictures coming soon.</p>
+        </div>
+
+        <div class="section-box">
+            <h2>Stickman Adventure</h2>
+            <div class="gallery-grid">
+                <img src="../assets/pictures/gallery/stickman/stickman1.png" alt="Stickman Adventure screenshot 1">
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox" aria-label="Fullscreen image viewer">
+        <button class="lightbox-close" aria-label="Close image">×</button>
+        <img id="lightbox-image" src="" alt="Full size gallery image">
+    </div>
+
+    <script>
+        const music = document.getElementById("bg-music");
+        const toggle = document.getElementById("music-toggle");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightbox-image");
+        const closeButton = document.querySelector(".lightbox-close");
+        let playing = false;
+
+        toggle.addEventListener("click", () => {
+            if (!playing) {
+                music.play();
+                toggle.textContent = "Pause Music";
+                playing = true;
+            } else {
+                music.pause();
+                toggle.textContent = "Play Music";
+                playing = false;
+            }
+        });
+
+        document.querySelectorAll(".gallery-grid img").forEach((img) => {
+            img.addEventListener("click", () => {
+                lightboxImage.src = img.src;
+                lightbox.classList.add("open");
+            });
+        });
+
+        closeButton.addEventListener("click", () => {
+            lightbox.classList.remove("open");
+            lightboxImage.src = "";
+        });
+
+        lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) {
+                lightbox.classList.remove("open");
+                lightboxImage.src = "";
+            }
+        });
+    </script>
+</body>
+</html>

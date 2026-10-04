@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mira Bluetail | Bios</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-image: url("../assets/pictures/codebg.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			text-align: center;
+			margin: 0;
+			padding: 0;
+			color: #111;
+			overflow-x: hidden;
+		}
+
+		.header-bar {
+			width: 100%;
+			background: rgba(255, 255, 255, 0.85);
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 40px;
+			padding: 5px 20px;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 1000;
+			box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+			height: 120px;
+		}
+
+		.header-bar img {
+			height: 150px;
+		}
+
+		.nav-links a {
+			font-size: 18px;
+			color: #b30000;
+			text-decoration: none;
+			font-weight: bold;
+			padding: 5px 8px;
+		}
+
+		.nav-links a:hover {
+			text-decoration: underline;
+		}
+
+		.content {
+			padding: 180px 20px 60px;
+			max-width: 1000px;
+			margin: 0 auto;
+		}
+
+		h1,
+		h2 {
+			color: #b30000;
+		}
+
+		h1 {
+			margin-bottom: 10px;
+		}
+
+		.tagline {
+			margin: 0 0 24px;
+			font-size: 20px;
+		}
+
+		.bio-card {
+			display: grid;
+			grid-template-columns: minmax(200px, 300px) minmax(0, 1fr);
+			gap: 28px;
+			align-items: start;
+			width: 100%;
+			padding: 24px;
+			box-sizing: border-box;
+			background: rgba(255, 255, 255, 0.9);
+			border-radius: 10px;
+			text-align: left;
+		}
+
+		.bio-image {
+			display: block;
+			width: 100%;
+			height: auto;
+			border-radius: 8px;
+		}
+
+		.bio-image-button {
+			display: block;
+			width: 100%;
+			padding: 0;
+			border: 0;
+			background: transparent;
+			cursor: zoom-in;
+		}
+
+		.bio-image-button:focus-visible {
+			outline: 3px solid #b30000;
+			outline-offset: 4px;
+		}
+
+		.lightbox {
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.9);
+			display: none;
+			align-items: center;
+			justify-content: center;
+			z-index: 3000;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		.lightbox.open {
+			display: flex;
+		}
+
+		.lightbox img {
+			max-width: 100%;
+			max-height: 90vh;
+			object-fit: contain;
+			border-radius: 10px;
+			border: 3px solid #fff;
+			background: #000;
+		}
+
+		.lightbox-close {
+			position: absolute;
+			top: 20px;
+			right: 25px;
+			font-size: 40px;
+			color: white;
+			background: none;
+			border: none;
+			cursor: pointer;
+			line-height: 1;
+		}
+
+		.bio-details h2 {
+			margin-top: 0;
+		}
+
+		.bio-facts {
+			display: grid;
+			grid-template-columns: max-content 1fr;
+			gap: 8px 14px;
+			margin: 0 0 24px;
+		}
+
+		.bio-facts dt {
+			font-weight: bold;
+		}
+
+		.bio-facts dd {
+			margin: 0;
+		}
+
+		.bio-details p,
+		.bio-details li {
+			font-size: 17px;
+			line-height: 1.5;
+		}
+
+		.bio-details ul {
+			padding-left: 22px;
+		}
+
+		.bio-details li {
+			margin: 6px 0;
+		}
+
+		#music-toggle {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			padding: 10px 20px;
+			font-size: 18px;
+			background: #b30000;
+			color: white;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			z-index: 2000;
+		}
+
+		@media (max-width: 650px) {
+			.header-bar {
+				flex-direction: column;
+				height: auto;
+				padding: 10px 8px;
+				gap: 8px;
+				box-sizing: border-box;
+			}
+
+			.header-bar img {
+				height: 70px;
+			}
+
+			.nav-links {
+				width: 100%;
+				text-align: center;
+			}
+
+			.nav-links a {
+				font-size: 14px;
+			}
+
+			.content {
+				padding: 185px 12px 60px;
+			}
+
+			.tagline {
+				font-size: 17px;
+			}
+
+			.bio-card {
+				grid-template-columns: 1fr;
+				gap: 20px;
+				padding: 16px;
+			}
+
+			.bio-image {
+				width: 100%;
+			}
+
+			.bio-image-button {
+				width: min(100%, 300px);
+				margin: 0 auto;
+			}
+
+			.bio-details p,
+			.bio-details li {
+				font-size: 16px;
+			}
+
+			.bio-facts {
+				grid-template-columns: 1fr;
+				gap: 3px;
+			}
+
+			.bio-facts dd {
+				margin: 0 0 9px;
+			}
+
+			#music-toggle {
+				padding: 8px 12px;
+				font-size: 14px;
+				bottom: 10px;
+				right: 10px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="header-bar">
+		<img src="../assets/pictures/logo.png" alt="Team Ruby Logo">
+		<div class="nav-links">
+			<a href="../index.html">Home</a>
+		</div>
+	</div>
+
+	<button id="music-toggle" type="button">Play Music</button>
+	<audio id="bg-music" src="../assets/audio/main-music.mp3" loop></audio>
+
+	<main class="content">
+		<h1>Mira Bluetail</h1>
+		<p class="tagline">Meet Mira, the fox girl who will save the world.</p>
+
+		<section class="bio-card" aria-label="Mira Bluetail's character bio">
+			<button class="bio-image-button" type="button" aria-label="View Mira's picture full screen" aria-haspopup="dialog">
+				<img class="bio-image" src="../assets/pictures/mira.jpg" alt="Mira Bluetail, an orange fox girl with blue accents">
+			</button>
+			<div class="bio-details">
+				<dl class="bio-facts">
+					<dt>Name</dt><dd>Mira Bluetail</dd>
+					<dt>Age</dt><dd>21</dd>
+					<dt>Species</dt><dd>Fox Girl</dd>
+					<dt>Role</dt><dd>Main Player Character</dd>
+					<dt>Home Region</dt><dd>Fox Kingdom</dd>
+					<dt>Threat Level</dt><dd>Moderate (only when annoyed)</dd>
+				</dl>
+
+				<h2>Personality</h2>
+				<p>Mira is energetic, curious, and quick to jump into action. She approaches danger with confidence and keeps a positive attitude even when the world is under attack by hostile chickens. Mira is known for her fast reflexes, sharp instincts, and upbeat spirit. She prefers exploring new areas, helping others, and solving problems with determination rather than fear.</p>
+
+				<h2>Abilities</h2>
+				<ul>
+					<li>High mobility and fast directional movement</li>
+					<li>Quick reaction time during enemy encounters</li>
+					<li>Skilled with basic ranged weapons</li>
+					<li>Strong adaptability in chaotic environments</li>
+				</ul>
+
+				<h2>Mission</h2>
+				<p>Protect the world from the sudden chicken uprising and restore peace to every region affected by the attack.</p>
+			</div>
+		</section>
+	</main>
+
+	<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Mira Bluetail full-screen picture" aria-hidden="true">
+		<button class="lightbox-close" type="button" aria-label="Close image">×</button>
+		<img id="lightbox-image" src="" alt="Full-size picture of Mira Bluetail">
+	</div>
+
+	<script>
+		const music = document.getElementById("bg-music");
+		const toggle = document.getElementById("music-toggle");
+		const miraImageButton = document.querySelector(".bio-image-button");
+		const miraImage = document.querySelector(".bio-image");
+		const lightbox = document.getElementById("lightbox");
+		const lightboxImage = document.getElementById("lightbox-image");
+		const closeButton = document.querySelector(".lightbox-close");
+		let playing = false;
+		let previousBodyOverflow = "";
+
+		toggle.addEventListener("click", () => {
+			if (!playing) {
+				music.play();
+				toggle.textContent = "Pause Music";
+				playing = true;
+			} else {
+				music.pause();
+				toggle.textContent = "Play Music";
+				playing = false;
+			}
+		});
+
+		function openLightbox() {
+			previousBodyOverflow = document.body.style.overflow;
+			lightboxImage.src = miraImage.currentSrc || miraImage.src;
+			lightboxImage.alt = miraImage.alt;
+			lightbox.classList.add("open");
+			lightbox.setAttribute("aria-hidden", "false");
+			document.body.style.overflow = "hidden";
+			closeButton.focus();
+		}
+
+		function closeLightbox() {
+			lightbox.classList.remove("open");
+			lightboxImage.src = "";
+			lightbox.setAttribute("aria-hidden", "true");
+			document.body.style.overflow = previousBodyOverflow;
+			miraImageButton.focus();
+		}
+
+		miraImageButton.addEventListener("click", openLightbox);
+		closeButton.addEventListener("click", closeLightbox);
+
+		lightbox.addEventListener("click", (event) => {
+			if (event.target === lightbox) {
+				closeLightbox();
+			}
+		});
+
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && lightbox.classList.contains("open")) {
+				closeLightbox();
+			}
+		});
+	</script>
+</body>
+</html>

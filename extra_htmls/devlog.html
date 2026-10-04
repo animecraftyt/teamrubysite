@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devlogs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("../assets/pictures/codebg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #111;
+            overflow-x: hidden;
+        }
+
+        .header-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            padding: 5px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+            height: 120px;
+        }
+
+        .header-bar img {
+            height: 150px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-size: 18px;
+            color: #b30000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 8px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding-top: 180px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 60px;
+        }
+
+        h1 {
+            color: #b30000;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #b30000;
+            margin-top: 40px;
+        }
+
+        .section-box {
+            background: rgba(255, 255, 255, 0.9);
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .section-box h2 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+
+        .section-box p {
+            margin: 8px 0;
+            font-size: 18px;
+        }
+
+        .home-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #b30000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        .spoiler-warning {
+            font-weight: bold;
+            color: #b30000;
+            margin-bottom: 10px;
+        }
+
+        .spoiler-toggle,
+        .devlogs-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #b30000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .spoiler-content {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .spoiler-content.visible {
+            display: block;
+        }
+
+        #music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #b30000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 2000;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .header-bar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px 8px;
+                gap: 8px;
+                box-sizing: border-box;
+            }
+
+            .header-bar img {
+                height: 70px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+                padding: 4px 6px;
+            }
+
+            .content {
+                padding-top: 185px;
+                padding-left: 10px;
+                padding-right: 10px;
+                box-sizing: border-box;
+            }
+
+            .section-box {
+                width: 92%;
+                padding: 15px 12px;
+                box-sizing: border-box;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .section-box h2 {
+                font-size: 22px;
+            }
+
+            .section-box p {
+                font-size: 16px;
+            }
+
+            #music-toggle {
+                padding: 8px 12px;
+                font-size: 14px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <img src="../assets/pictures/logo.png" alt="Team Ruby Logo">
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+        </div>
+    </div>
+
+    <button id="music-toggle">Play Music</button>
+    <audio id="bg-music" src="../assets/audio/main-music.mp3" loop></audio>
+
+    <div class="content">
+        <a class="home-link" href="../index.html">← Back to Home</a>
+        <h1>Devlogs</h1>
+
+        <div class="section-box">
+            <h2>Stickman Adventure</h2>
+            <p><strong>Genre:</strong> Open-World Platformer</p>
+            <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Content:</strong> Mild Cartoon Violence</p>
+        </div>
+
+        <div class="section-box">
+            <h2>Unexpected Honk Has Occurred</h2>
+            <p><strong>Genre:</strong> Visual Novel</p>
+            <p><strong>Rating:</strong> All Ages</p>
+            
+        </div>
+
+        <div class="section-box">
+            <h2>Chicken Shooter 64</h2>
+            <p><strong>Genre:</strong> First-Person Shooter</p>
+            <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Content:</strong> Fantasy Violence, Comical Shenanigans</p>
+            <button class="devlogs-toggle" type="button" aria-expanded="false" aria-controls="chicken-devlogs">Show Devlogs</button>
+        </div>
+
+        <div id="chicken-devlogs" hidden>
+        <div class="section-box">
+            <h2>Chicken Shooter 64 — Devlog 1</h2>
+            <div>
+                <p><strong>Gamejolt page now up and Mira’s bio is also up.</strong></p>
+                <p>We have so far the grass planes. We need to make the map and gun, and need to make Mira low poly plus do her animations. Plus make her shotgun, and her idle animation is ready thanks to Blender. We got textures and signs and bullets and UI and HP ready too, so it’s about 5% done.</p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Chicken Shooter 64 — Devlog 2</h2>
+            <div>
+                <p>We finally finished Mira and added controller support. We still need to add a few things before the prototype is ready.</p>
+                <p><strong>Prototype progress: 80%</strong></p>
+                <p>The remaining 20% is making the chickens, finishing the map, and making the gun and getting it working once we have the gun model.</p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Chicken Shooter 64 — Devlog 3: Had to Change Godot Versions</h2>
+            <div>
+                <p>A strange grey-and-white house appeared in the game yesterday. I didn’t add it, and I’m trying to find a way to open it. I thought a cheat code might work, but I haven’t been able to get it to work, so I’m asking you to try opening it.</p>
+                <p>I also had to switch to Godot 4.3 because the Godot 4.7.2 editor kept crashing. The game also crashes every time I enter the house.</p>
+                <p>Maybe we can combine the Sonic 3 cheat code with the Konami Code to open the house and see what’s inside.</p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Chicken Shooter 64 — Devlog 4: The Grey-and-White House</h2>
+            <div>
+                <p>The way into the house has changed. Now you get in with [REDACTED], or, if you’re using a controller, [REDACTED].</p>
+                <p>There’s a chest inside. And no, it’s not the FNAF 4 box, so don’t assume there’s lore about the grey-and-white house. (I might change my mind about that.)</p>
+                <p>When you go near the chest, the game closes, and the player’s UI says, “How did you get here?”</p>
+                <p>It’s still a mystery. If I leave it alone, it’ll stay that way. (And no, my name isn’t Scott Cawthon.)</p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Chicken Shooter 64 — Devlog 5</h2>
+            <div>
+                <p><strong>The prototype is out! Go play it!</strong></p>
+            </div>
+        </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Amy’s Epic Adventure</h2>
+            <p><strong>Genre:</strong> Platformer / Action</p>
+            <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Content:</strong> Mild Fantasy Violence, Comical Shenanigans</p>
+            <button class="devlogs-toggle" type="button" aria-expanded="false" aria-controls="amy-devlogs">Show Devlogs</button>
+        </div>
+
+        <div id="amy-devlogs" hidden>
+        <div class="section-box">
+            <h2>Amy’s Epic Adventure — Devlog 1</h2>
+            <div>
+                <p><strong>The prototype has been patched.</strong></p>
+                <p><strong>Patch Notes:</strong></p>
+                <ul>
+                    <li>Fixed the pause menu.</li>
+                    <li>Added more to the quit button.</li>
+                    <li>Got rid of the secret things that were on via debug mode since debug mode using my profile stuff is off. Go get those 3 trophies to earn the secret stuff.</li>
+                    <li>Removed the game soundtrack from GameJolt and replaced it with a Google Drive link.</li>
+                    <li>Removed Monkia. (How did she escape her own game anyways?)</li>
+                </ul>
+                <p><em>Also, do not mind the white bow in the settings menu and don’t you dare click it 21 times.</em></p>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <h2>Amy’s Epic Adventure — Devlog 2</h2>
+            <div>
+                <p class="spoiler-warning">Spoilers ahead. Click “Show It” to reveal the boss-fight details.</p>
+                <button class="spoiler-toggle" type="button">Show It</button>
+                <div class="spoiler-content">
+                    <h3>For the Eggman / Robotnik Boss Fight</h3>
+                    <p><strong>1. Overview & Settings</strong></p>
+                    <p>Total Hits: 6 total to defeat the boss.</p>
+                    <p>Player Resources: 15 rings provided for the encounter.</p>
+                    <p>Character Customization: Appearance and theme music dynamically change based on whether the player’s settings call the boss “Eggman” or “Robotnik”.</p>
+                    <p>Audio for when the boss appears:</p>
+                    <ul>
+                        <li>If Eggman: Sonic Adventure 2 Eggman theme.</li>
+                        <li>If Robotnik: Adventures of Sonic the Hedgehog (AoStH) theme.</li>
+                    </ul>
+                    <p>Boss themes:</p>
+                    <ul>
+                        <li>If Eggman: Sonic Adventure 1 boss theme.</li>
+                        <li>If Robotnik: Sonic the Hedgehog (SatAM) Robotnik theme boss remix version.</li>
+                    </ul>
+                    <p>The boss appearance:</p>
+                    <ul>
+                        <li>If Eggman: classic Eggman.</li>
+                        <li>If Robotnik: Robotnik from SatAM.</li>
+                    </ul>
+
+                    <p><strong>2. Phase 1 (Hits 1–3)</strong></p>
+                    <p>Inspiration: Classic Green Hill Zone boss fight from Sonic 1.</p>
+                    <p>Mechanic: The Egg Mobile swings a dangerous saw blade instead of the standard ball-and-chain.</p>
+
+                    <p><strong>3. Phase 2 (Hits 4–6)</strong></p>
+                    <p>Escalation: Track speed increases and the atmosphere intensifies.</p>
+                    <p>New Attacks & Minions:</p>
+                    <ul>
+                        <li>A cannon is mounted on the bottom of the Egg Mobile, shooting projectiles.</li>
+                        <li>Classic cartoon minions—Scratch, Grounder, Coconuts, and Snively—join in to drop bombs from above.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        const music = document.getElementById("bg-music");
+        const toggle = document.getElementById("music-toggle");
+        const spoilerToggle = document.querySelector(".spoiler-toggle");
+        const spoilerContent = document.querySelector(".spoiler-content");
+        let playing = false;
+
+        toggle.addEventListener("click", () => {
+            if (!playing) {
+                music.play();
+                toggle.textContent = "Pause Music";
+                playing = true;
+            } else {
+                music.pause();
+                toggle.textContent = "Play Music";
+                playing = false;
+            }
+        });
+
+        document.querySelectorAll(".devlogs-toggle").forEach((button) => {
+            button.addEventListener("click", () => {
+                const content = document.getElementById(button.getAttribute("aria-controls"));
+                const isExpanded = button.getAttribute("aria-expanded") === "true";
+                button.setAttribute("aria-expanded", String(!isExpanded));
+                button.textContent = isExpanded ? "Show Devlogs" : "Hide Devlogs";
+                content.hidden = isExpanded;
+            });
+        });
+
+        spoilerToggle.addEventListener("click", () => {
+            const isVisible = spoilerContent.classList.toggle("visible");
+            spoilerToggle.textContent = isVisible ? "Hide It" : "Show It";
+        });
+    </script>
+</body>
+</html>

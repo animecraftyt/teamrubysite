@@ -14,6 +14,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         /* Header Bar */
@@ -115,32 +116,43 @@
             .header-bar {
                 flex-direction: column;
                 height: auto;
-                padding: 10px;
-                gap: 10px;
+                padding: 10px 8px;
+                gap: 8px;
+                box-sizing: border-box;
             }
 
             .header-bar img {
-                height: 80px;
+                height: 70px;
             }
 
             .nav-links {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 10px;
+                gap: 6px 10px;
+                width: 100%;
             }
 
             .nav-links a {
-                font-size: 14px;
-                padding: 4px;
+                font-size: 12px;
+                padding: 4px 6px;
+                line-height: 1.2;
             }
 
             .content {
-                padding-top: 200px;
+                padding-top: 195px;
+                padding-left: 10px;
+                padding-right: 10px;
+                box-sizing: border-box;
             }
 
             .section-box {
-                width: 95%;
-                padding: 15px;
+                width: 92%;
+                padding: 15px 12px;
+                box-sizing: border-box;
+            }
+
+            h1 {
+                font-size: 28px;
             }
 
             h2 {
@@ -172,11 +184,12 @@
     <div class="header-bar">
         <img src="assets/pictures/logo.png" alt="Team Ruby Logo">
         <div class="nav-links">
-            <a href="#devlogs">Devlogs</a>
+            <a href="extra_htmls/devlog.html">Devlogs</a>
+            <a href="extra_htmls/bios.html">Bios</a>
             <a href="#games">Games</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#about">About Us</a>
-            <a href="#gameslist">Our Games</a>
+            <a href="extra_htmls/gallery.html">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#gameslist">Projects</a>
             <a href="#oldsites">Old Sites</a>
             <a href="#whyupgrade">Why I Upgraded</a>
         </div>
@@ -189,25 +202,19 @@
     <div class="content">
 
         <h1>Welcome to Team Ruby!</h1>
-        <p>We’re a small indie group creating colorful, retro‑inspired games with big personality. From first‑person chicken battles to platforming adventures and quirky experiments, Team Ruby is all about fun ideas, creative worlds, and projects made with passion. Explore our games, follow our progress, and enjoy the journey!</p>
+        <p>We’re a small indie game studio creating colorful, retro‑inspired games with big personality. Right now, Team Ruby is a solo-run project, but it’s built on fun ideas, creative worlds, and a lot of passion. From first‑person chicken battles to platforming adventures and quirky experiments, this is where I share my games, progress, and the journey behind them.</p>
 
         <!-- Devlogs Section -->
         <h2 id="devlogs">Devlogs</h2>
 
         <div class="section-box">
-            <h3>Original Games</h3>
-            <ul>
-                <li><strong>Stickman Adventure</strong> – Devlog coming soon.</li>
-                <li><strong>Unexpected Honk Has Occurred</strong> – Devlog coming soon.</li>
-                <li><strong>Chicken Shooter 64</strong> – Devlog coming soon.</li>
-            </ul>
+            <p><a href="extra_htmls/devlog.html">Click me to see the devlogs</a></p>
         </div>
 
+        <!-- Bios Section -->
+        <h2 id="bios">Bios</h2>
         <div class="section-box">
-            <h3>Fan Games</h3>
-            <ul>
-                <li><strong>Amy’s Epic Adventure</strong> – Devlog coming soon.</li>
-            </ul>
+            <p><a href="extra_htmls/bios.html">Meet Mira Bluetail</a></p>
         </div>
 
         <!-- Games Section -->
@@ -346,6 +353,7 @@
 
             <p><strong>Genre:</strong> Open‑World Platformer</p>
             <p><strong>Rating:</strong> All Ages</p>
+            <p><strong>Content:</strong> Mild Cartoon Violence</p>
 
             <h3>Description</h3>
             <p>
@@ -369,17 +377,17 @@
         <!-- About Section -->
         <h2 id="about">About Team Ruby</h2>
         <div class="section-box">
-            <p>Team Ruby is a small indie game development group creating fun, retro‑inspired projects. We focus on low‑poly or 2D worlds, with simple or hard gameplay, and creative ideas that feel like classic games with a modern twist.</p>
+            <p>Team Ruby is a small indie game development group creating fun, retro‑inspired projects. Right now, it’s a solo-run studio building games, learning, and experimenting with new ideas. We focus on low‑poly or 2D worlds, with simple or hard gameplay, and creative ideas that feel like classic games with a modern twist.</p>
 
             <p>Our current projects include Chicken Shooter 64, Amy’s Epic Adventure, Paper Sonic the Hedgehog, Unexpected Honk Has Occurred, and Stickman Adventure.</p>
 
-            <p>We’re all about experimenting, learning, and making games that are colorful, weird, and full of personality.</p>
+            <p>We’re all about experimenting, learning, and making games that are colorful, weird, and full of personality. As the projects grow, the goal is to keep building Team Ruby into something bigger and stronger.</p>
         </div>
 
         <!-- Gallery Section -->
-        <h2 id="gallery">Game Gallery</h2>
-        <div class="section-box gallery">
-            <p>Gallery images will go here.</p>
+        <h2 id="gallery">Gallery</h2>
+        <div class="section-box">
+            <p><a href="extra_htmls/gallery.html">Click me to see the gallery</a></p>
         </div>
 
         <!-- Games List -->
@@ -419,9 +427,9 @@
         <div class="section-box">
             <p><strong>Old Site Version 1</strong> was my very first test. I wanted to see if I could make a website for myself, long before Team Ruby existed. It was simple, but it helped me learn how websites work.</p>
 
-            <p><strong>Old Site Version 2</strong> was me trying something bigger. It had achievements, a CRT filter, and more features, but the limits of the platform didn’t feel right for what I wanted. Even with the cool effects, it wasn’t flexible enough.</p>
+            <p><strong>Old Site Version 2</strong> was me trying something bigger. It had achievements, a CRT filter, and more features, but the platform’s limits didn’t feel right for what I wanted. Even with the cool effects, it wasn’t flexible enough.</p>
 
-            <p>This new site is the one I’m proud of. It’s cleaner, bigger, and built the way I want. Hopefully, this will be the last time I remake the Team Ruby website — and the version I stick with as the team grows.</p>
+            <p>This new site is the one I’m proud of. It’s cleaner, bigger, and built the way I want it. Hopefully, this will be the last time I remake the Team Ruby website — and the version I stick with as the team grows.</p>
         </div>
 
     </div>
