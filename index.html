@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Ruby</title>
     <style>
+        html {
+            scroll-padding-top: 140px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-image: url("assets/pictures/codebg.png");
@@ -24,22 +28,45 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            gap: 40px;
-            padding: 5px 20px;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            padding: 8px 20px;
+            box-sizing: border-box;
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
             box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
-            height: 120px;
+            min-height: 120px;
+            height: auto;
         }
 
         .header-bar img {
             height: 150px;
+            max-width: 100%;
+            flex: none;
+        }
+
+        .logo-secret-trigger {
+            display: block;
+            flex: none;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            line-height: 0;
+            cursor: pointer;
+        }
+
+        .logo-secret-trigger:focus-visible {
+            outline: 3px solid #b30000;
+            outline-offset: 4px;
         }
 
         .nav-links {
             display: flex;
+            flex: 1 1 600px;
+            flex-wrap: wrap;
+            min-width: 0;
             gap: 15px;
         }
 
@@ -77,6 +104,74 @@
             padding: 20px;
             border-radius: 10px;
         }
+
+        .homepage-account {
+            text-align: left;
+        }
+
+        .homepage-account h3 {
+            margin-top: 0;
+            color: #b30000;
+        }
+
+        .homepage-account-modes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .homepage-account-mode,
+        .homepage-account-submit,
+        .homepage-account-signout {
+            min-height: 40px;
+            padding: 8px 12px;
+            border: 1px solid #b30000;
+            border-radius: 5px;
+            background: #fff;
+            color: #8f0000;
+            cursor: pointer;
+            font: inherit;
+            font-weight: bold;
+        }
+
+        .homepage-account-mode[aria-pressed="true"],
+        .homepage-account-submit,
+        .homepage-account-signout {
+            background: #b30000;
+            color: #fff;
+        }
+
+        .homepage-account-form {
+            display: grid;
+            gap: 8px;
+            max-width: 460px;
+        }
+
+        .homepage-account-form input {
+            min-height: 42px;
+            padding: 8px 10px;
+            border: 1px solid #777;
+            border-radius: 4px;
+            font: inherit;
+        }
+
+        #home-account-username-row[hidden],
+        #home-account-signed-in[hidden],
+        #home-account-signed-out[hidden] {
+            display: none;
+        }
+
+        .homepage-account-message {
+            min-height: 1.4em;
+            margin-bottom: 0;
+            color: #111;
+            font-size: 14px;
+        }
+
+        .homepage-account button:disabled {
+            cursor: default;
+            opacity: 0.6;
+        }
         ul {
             list-style: none;
             padding: 0;
@@ -111,8 +206,292 @@
             height: auto;
         }
 
+        iframe {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .secret-game {
+            position: fixed;
+            inset: 0;
+            z-index: 4000;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            overflow: hidden;
+            background: #d8f4ff;
+            color: #171717;
+            text-align: left;
+        }
+
+        .secret-game[hidden] {
+            display: none;
+        }
+
+        .mini-game-topbar,
+        .mini-game-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.96);
+            z-index: 1;
+        }
+
+        .mini-game-topbar {
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+        }
+
+        .mini-game-title {
+            margin: 0;
+            color: #b30000;
+            font-size: 20px;
+        }
+
+        .mini-game-score {
+            margin: 0;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .mini-game-misses {
+            margin: 0;
+            color: #b30000;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .mini-game-wallet {
+            margin: 0;
+            color: #285b22;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .mini-game-close,
+        .game-control,
+        #mini-game-use-potion {
+            border: 0;
+            border-radius: 6px;
+            background: #b30000;
+            color: white;
+            cursor: pointer;
+            font: inherit;
+            font-weight: bold;
+        }
+
+        .mini-game-close {
+            width: 42px;
+            height: 42px;
+            font-size: 30px;
+            line-height: 1;
+        }
+
+        .mini-game-stage {
+            position: relative;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .mini-game-game-over {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 18px;
+            box-sizing: border-box;
+            background: rgba(15, 20, 30, 0.68);
+        }
+
+        @keyframes game-over-drop {
+            0% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+            72% {
+                transform: translateY(12px);
+                opacity: 1;
+            }
+            88% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .mini-game-game-over[hidden] {
+            display: none;
+        }
+
+        .game-over-panel {
+            width: min(100%, 420px);
+            padding: 24px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+            text-align: center;
+            animation: game-over-drop 650ms cubic-bezier(0.22, 0.78, 0.28, 1) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .game-over-panel {
+                animation: none;
+            }
+        }
+
+        .game-over-panel h3 {
+            margin: 0 0 10px;
+            color: #b30000;
+            font-size: 28px;
+        }
+
+        .game-over-panel p {
+            margin: 10px 0;
+        }
+
+        .game-over-form {
+            display: grid;
+            gap: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .game-over-form input {
+            width: 100%;
+            min-height: 42px;
+            padding: 8px 10px;
+            box-sizing: border-box;
+            border: 1px solid #777;
+            border-radius: 4px;
+            font: inherit;
+        }
+
+        .game-over-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mini-game-action,
+        .mini-game-leaderboard-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 8px 14px;
+            box-sizing: border-box;
+            border: 0;
+            border-radius: 6px;
+            background: #b30000;
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .mini-game-action:disabled,
+        #mini-game-use-potion:disabled {
+            background: #666;
+            cursor: default;
+        }
+
+        .game-over-status {
+            min-height: 1.5em;
+            color: #285b22;
+            font-weight: bold;
+        }
+
+        #mini-game-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+
+        .mini-game-hint {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .mini-game-touch-controls {
+            display: none;
+            gap: 8px;
+        }
+
+        .game-control {
+            min-width: 48px;
+            height: 44px;
+            padding: 0 12px;
+            font-size: 18px;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .mini-game-close:focus-visible,
+        .game-control:focus-visible,
+        #mini-game-use-potion:focus-visible {
+            outline: 3px solid #111;
+            outline-offset: 3px;
+        }
+
+        @media (pointer: coarse), (max-width: 600px) {
+            .mini-game-touch-controls {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 1200px) and (min-width: 601px) {
+            html {
+                scroll-padding-top: 220px;
+            }
+
+            .header-bar {
+                flex-direction: column;
+                height: auto;
+                min-height: 120px;
+                padding: 8px 12px;
+                gap: 8px;
+                box-sizing: border-box;
+            }
+
+            .header-bar img {
+                height: 90px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+                gap: 4px 10px;
+            }
+
+            .nav-links a {
+                font-size: 16px;
+                padding: 4px 8px;
+            }
+
+            .content {
+                padding-top: 220px;
+            }
+        }
+
         /* Mobile Styles */
         @media (max-width: 600px) {
+            html {
+                scroll-padding-top: 230px;
+            }
+
             .header-bar {
                 flex-direction: column;
                 height: auto;
@@ -139,7 +518,7 @@
             }
 
             .content {
-                padding-top: 195px;
+                padding-top: 230px;
                 padding-left: 10px;
                 padding-right: 10px;
                 box-sizing: border-box;
@@ -174,21 +553,89 @@
                 bottom: 10px;
                 right: 10px;
             }
+
+            .mini-game-topbar,
+            .mini-game-footer {
+                padding: 8px;
+                gap: 8px;
+            }
+
+            .mini-game-topbar {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+            }
+
+            .mini-game-title {
+                grid-column: 1;
+                grid-row: 1;
+                font-size: 16px;
+            }
+
+            .mini-game-score {
+                grid-column: 1;
+                grid-row: 2;
+                font-size: 14px;
+            }
+
+            .mini-game-misses {
+                grid-column: 1;
+                grid-row: 3;
+                font-size: 14px;
+            }
+
+            .mini-game-wallet {
+                grid-column: 1;
+                grid-row: 4;
+                font-size: 14px;
+            }
+
+            .mini-game-close {
+                grid-column: 2;
+                grid-row: 1 / span 4;
+            }
+
+            .game-over-panel {
+                padding: 18px;
+            }
+
+            .game-over-panel h3 {
+                font-size: 24px;
+            }
+
+            .mini-game-footer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .mini-game-hint {
+                font-size: 12px;
+            }
+
+            .game-control {
+                min-width: 44px;
+                height: 42px;
+                padding: 0 10px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/vhs.css">
 </head>
 
 <body>
 
     <!-- HEADER BAR -->
     <div class="header-bar">
-        <img src="assets/pictures/logo.png" alt="Team Ruby Logo">
+        <button id="logo-secret-trigger" class="logo-secret-trigger" type="button" aria-label="Team Ruby logo">
+            <img src="assets/pictures/logo.png" alt="">
+        </button>
         <div class="nav-links">
             <a href="extra_htmls/devlog.html">Devlogs</a>
             <a href="extra_htmls/bios.html">Bios</a>
+            <a href="#team-ruby-account">Account</a>
             <a href="#games">Games</a>
             <a href="extra_htmls/gallery.html">Gallery</a>
             <a href="#about">About</a>
+            <a href="#socials">Socials</a>
             <a href="#gameslist">Projects</a>
             <a href="#oldsites">Old Sites</a>
             <a href="#whyupgrade">Why I Upgraded</a>
@@ -198,6 +645,50 @@
     <!-- MUSIC TOGGLE -->
     <button id="music-toggle">Play Music</button>
     <audio id="bg-music" src="assets/audio/main-music.mp3" loop></audio>
+
+    <section id="secret-mini-game" class="secret-game" role="dialog" aria-modal="true" aria-labelledby="mini-game-title" hidden>
+        <div class="mini-game-topbar">
+            <h2 id="mini-game-title" class="mini-game-title">Box Art Frenzy</h2>
+            <p class="mini-game-score" aria-live="polite">Collected: <span id="mini-game-score">0</span></p>
+            <p class="mini-game-misses" aria-live="polite">Missed: <span id="mini-game-misses">0</span>/5</p>
+            <p class="mini-game-wallet" aria-live="polite">Box Bucks: <span id="mini-game-wallet">0</span></p>
+            <button id="mini-game-close" class="mini-game-close" type="button" aria-label="Close mini game">×</button>
+        </div>
+        <div class="mini-game-stage">
+            <canvas id="mini-game-canvas" aria-label="Mira jumps around and collects falling Chicken Shooter 64 box art"></canvas>
+        </div>
+        <div class="mini-game-footer">
+            <p class="mini-game-hint">← / → move · ↑ or Space jump · ↓ fall faster</p>
+            <button id="mini-game-use-potion" type="button" disabled>Use Slow Potion (0)</button>
+            <div class="mini-game-touch-controls" aria-label="Touch controls">
+                <button class="game-control" type="button" data-game-key="ArrowLeft" aria-label="Move left">←</button>
+                <button class="game-control" type="button" data-game-key="ArrowRight" aria-label="Move right">→</button>
+                <button class="game-control" type="button" data-game-key="Space" aria-label="Jump">Jump</button>
+            </div>
+        </div>
+        <div id="mini-game-game-over" class="mini-game-game-over" hidden>
+            <section class="game-over-panel" aria-labelledby="game-over-title">
+                <h3 id="game-over-title">Game Over</h3>
+                <p>You missed five pieces of box art.</p>
+                <p>Final score: <strong id="mini-game-final-score">0</strong></p>
+                <p>Time to game over: <strong id="mini-game-final-time">0:00.0</strong></p>
+                <p>Box Bucks: <strong id="game-over-wallet">0</strong></p>
+                <p>Scores are saved in this browser.</p>
+                <form id="mini-game-score-form" class="game-over-form">
+                    <label for="mini-game-player-name">Name on the leaderboard</label>
+                    <input id="mini-game-player-name" name="playerName" maxlength="16" autocomplete="nickname" placeholder="Enter a name" required>
+                    <button id="mini-game-save-score" class="mini-game-action" type="submit">Save Score</button>
+                </form>
+                <p id="mini-game-score-status" class="game-over-status" aria-live="polite"></p>
+                <div class="game-over-actions">
+                    <button id="mini-game-use-revive" class="mini-game-action" type="button" disabled>Use Revive (0)</button>
+                    <a class="mini-game-leaderboard-link" href="extra_htmls/shop.html" target="_blank" rel="noopener noreferrer">Secret Shop</a>
+                    <button id="mini-game-restart" class="mini-game-action" type="button">Play Again</button>
+                    <a class="mini-game-leaderboard-link" href="extra_htmls/leaderboard.html">Leaderboard</a>
+                </div>
+            </section>
+        </div>
+    </section>
 
     <div class="content">
 
@@ -214,8 +705,34 @@
         <!-- Bios Section -->
         <h2 id="bios">Bios</h2>
         <div class="section-box">
-            <p><a href="extra_htmls/bios.html">click me to see the bios for our character's</a></p>
+            <p><a href="extra_htmls/bios.html">click me to see the bios of our characters</a></p>
         </div>
+
+        <section id="team-ruby-account" class="section-box homepage-account" aria-label="Team Ruby Games account">
+            <h3>Team Ruby Games Account</h3>
+            <div id="home-account-signed-out">
+                <div class="homepage-account-modes" aria-label="Account mode">
+                    <button id="home-account-sign-in-mode" class="homepage-account-mode" type="button" aria-pressed="true">Sign In</button>
+                    <button id="home-account-sign-up-mode" class="homepage-account-mode" type="button" aria-pressed="false">Sign Up</button>
+                </div>
+                <form id="home-account-form" class="homepage-account-form">
+                    <label for="home-account-email">Email</label>
+                    <input id="home-account-email" name="email" type="email" autocomplete="email" required>
+                    <div id="home-account-username-row" hidden>
+                        <label for="home-account-username">Username</label>
+                        <input id="home-account-username" name="username" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autocomplete="username">
+                    </div>
+                    <label for="home-account-password">Password</label>
+                    <input id="home-account-password" name="password" type="password" minlength="8" autocomplete="current-password" required>
+                    <button id="home-account-submit" class="homepage-account-submit" type="submit">Sign In</button>
+                </form>
+            </div>
+            <div id="home-account-signed-in" hidden>
+                <p>Signed in as <strong id="home-account-username-display"></strong></p>
+                <button id="home-account-sign-out" class="homepage-account-signout" type="button">Sign Out</button>
+            </div>
+            <p id="home-account-message" class="homepage-account-message" role="status" aria-live="polite">Checking account setup...</p>
+        </section>
 
         <!-- Games Section -->
         <h2 id="games">Games</h2>
@@ -234,12 +751,12 @@
         <div class="section-box">
             <h3>Fan Games</h3>
             <ul>
-                <li><a href="#games">Amy’s Epic Adventure</a></li>
+                <li><a href="#amy-adventure">Amy’s Epic Adventure</a></li>
             </ul>
         </div>
 
         <!-- Amy’s Epic Adventure Section -->
-        <div class="section-box" id="games">
+        <div class="section-box" id="amy-adventure">
             <h2>Amy’s Epic Adventure</h2>
 
             <p><strong>Rating:</strong> All Ages</p>
@@ -384,6 +901,13 @@
             <p>We’re all about experimenting, learning, and making games that are colorful, weird, and full of personality. As the projects grow, the goal is to keep building Team Ruby into something bigger and stronger.</p>
         </div>
 
+        <!-- Socials Section -->
+        <h2 id="socials">Socials</h2>
+        <div class="section-box">
+            <p><strong>Team Ruby Community:</strong> <a class="confirm-leave" href="https://gamejolt.com/c/ruby-y5ym9k" target="_blank" rel="noopener noreferrer">Join the Game Jolt community</a></p>
+            <p><strong>My Game Jolt Profile:</strong> <a class="confirm-leave" href="https://gamejolt.com/@animecraft64YT" target="_blank" rel="noopener noreferrer">Visit my profile</a></p>
+        </div>
+
         <!-- Gallery Section -->
         <h2 id="gallery">Gallery</h2>
         <div class="section-box">
@@ -412,12 +936,12 @@
             <p>Check out the older versions of the Team Ruby website:</p>
 
             <p><strong>Old Site Version 2:</strong><br>
-            <a href="https://6aa1d3285f602.site123.me/" target="_blank">
+            <a class="confirm-leave" href="https://6aa1d3285f602.site123.me/" target="_blank">
                 https://6aa1d3285f602.site123.me/
             </a></p>
 
             <p><strong>Old Site Version 1:</strong><br>
-            <a href="https://animecraft64ytpage.tiiny.site/" target="_blank">
+            <a class="confirm-leave" href="https://animecraft64ytpage.tiiny.site/" target="_blank">
                 https://animecraft64ytpage.tiiny.site/
             </a></p>
         </div>
@@ -432,13 +956,137 @@
             <p>This new site is the one I’m proud of. It’s cleaner, bigger, and built the way I want it. Hopefully, this will be the last time I remake the Team Ruby website — and the version I stick with as the team grows.</p>
         </div>
 
+        <h2>Site Views</h2>
+        <div class="section-box">
+            <img src="https://api.visitorbadge.io/api/visitors?path=teamruby-site-views-animecraft64yt&amp;label=Site%20Views&amp;labelColor=%23b30000&amp;countColor=%23ffffff&amp;style=flat" alt="Live Team Ruby site view count" class="site-views-counter">
+        </div>
+
     </div>
+
+    <script src="assets/js/player-name-filter.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/team-ruby-accounts.js"></script>
 
     <!-- MUSIC SCRIPT -->
     <script>
         const music = document.getElementById("bg-music");
         const toggle = document.getElementById("music-toggle");
         let playing = false;
+        const siteMusicSource = "assets/audio/main-music.mp3";
+        const miniGameMusicSource = "assets/audio/minigame-music.mp3";
+        const gameOverMusicSource = "assets/audio/gameover-theme.mp3";
+        const homeAccount = window.TeamRubyAccounts;
+        const homeAccountForm = document.getElementById("home-account-form");
+        const homeAccountEmail = document.getElementById("home-account-email");
+        const homeAccountUsernameRow = document.getElementById("home-account-username-row");
+        const homeAccountUsername = document.getElementById("home-account-username");
+        const homeAccountPassword = document.getElementById("home-account-password");
+        const homeAccountSubmit = document.getElementById("home-account-submit");
+        const homeAccountSignedOut = document.getElementById("home-account-signed-out");
+        const homeAccountSignedIn = document.getElementById("home-account-signed-in");
+        const homeAccountUsernameDisplay = document.getElementById("home-account-username-display");
+        const homeAccountMessage = document.getElementById("home-account-message");
+        const homeAccountSignInMode = document.getElementById("home-account-sign-in-mode");
+        const homeAccountSignUpMode = document.getElementById("home-account-sign-up-mode");
+        let homeAccountMode = "signin";
+
+        function setHomeAccountMode(mode) {
+            homeAccountMode = mode;
+            const isSigningUp = mode === "signup";
+            homeAccountUsernameRow.hidden = !isSigningUp;
+            homeAccountUsername.required = isSigningUp;
+            homeAccountPassword.autocomplete = isSigningUp ? "new-password" : "current-password";
+            homeAccountSubmit.textContent = isSigningUp ? "Create Account" : "Sign In";
+            homeAccountSignInMode.setAttribute("aria-pressed", String(!isSigningUp));
+            homeAccountSignUpMode.setAttribute("aria-pressed", String(isSigningUp));
+        }
+
+        function updateHomeAccountState(state) {
+            const user = state.user;
+            homeAccountSignedOut.hidden = Boolean(user);
+            homeAccountSignedIn.hidden = !user;
+            [...homeAccountForm.elements].forEach((control) => {
+                control.disabled = false;
+            });
+            if (!state.configured) {
+                homeAccountMessage.textContent = "Account setup is incomplete. Configure Supabase to enable sign-in and cross-device sync.";
+            } else if (user) {
+                homeAccountUsernameDisplay.textContent = homeAccount.getUsername(user);
+                homeAccountMessage.textContent = "Signed in. Your wallet and items sync to this account.";
+            } else {
+                homeAccountMessage.textContent = "Sign in to sync your wallet and items across devices.";
+            }
+        }
+
+        homeAccountSignInMode.addEventListener("click", () => setHomeAccountMode("signin"));
+        homeAccountSignUpMode.addEventListener("click", () => setHomeAccountMode("signup"));
+
+        homeAccountForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (!homeAccount.isConfigured()) {
+                homeAccountMessage.textContent = "Account setup is incomplete. Configure Supabase before creating an account.";
+                return;
+            }
+            homeAccountSubmit.disabled = true;
+            homeAccountMessage.textContent = "Working...";
+            try {
+                if (homeAccountMode === "signup") {
+                    const username = homeAccountUsername.value.trim();
+                    if (!window.isAllowedPlayerName(username)) {
+                        throw new Error("That username is not allowed. Please choose another.");
+                    }
+                    const result = await homeAccount.signUp(homeAccountEmail.value, username, homeAccountPassword.value);
+                    homeAccountMessage.textContent = result.session
+                        ? "Account created. Your items now sync to this account."
+                        : "Check your email to confirm the account, then sign in here.";
+                } else {
+                    await homeAccount.signIn(homeAccountEmail.value, homeAccountPassword.value);
+                    await homeAccount.loadPlayerInventory();
+                    homeAccountMessage.textContent = `Signed in as ${homeAccount.getUsername()}. Your items are synced.`;
+                }
+            } catch (error) {
+                homeAccountMessage.textContent = error.message || "Account request failed. Please try again.";
+            } finally {
+                homeAccountSubmit.disabled = false;
+            }
+        });
+
+        document.getElementById("home-account-sign-out").addEventListener("click", async () => {
+            try {
+                await homeAccount.signOut();
+                homeAccountMessage.textContent = "Signed out.";
+            } catch (error) {
+                homeAccountMessage.textContent = error.message || "Sign out failed.";
+            }
+        });
+
+        setHomeAccountMode("signin");
+        homeAccount.onChange(updateHomeAccountState);
+        homeAccount.initialize()
+            .then(updateHomeAccountState)
+            .catch((error) => {
+                homeAccountMessage.textContent = error.message || "Could not connect to the account service.";
+            });
+
+        document.querySelectorAll(".confirm-leave").forEach((link) => {
+            link.addEventListener("click", (event) => {
+                const shouldContinue = window.confirm("You are leaving the Team Ruby website. Would you like to continue?");
+                if (!shouldContinue) event.preventDefault();
+            });
+        });
+
+        function setMusicTrack(source, shouldPlay, loop) {
+            music.pause();
+            music.src = source;
+            music.loop = loop;
+            music.load();
+            if (shouldPlay) {
+                music.play().catch(() => {
+                    playing = false;
+                    toggle.textContent = "Play Music";
+                });
+            }
+        }
 
         toggle.addEventListener("click", () => {
             if (!playing) {
@@ -451,8 +1099,449 @@
                 playing = false;
             }
         });
+
+        music.addEventListener("ended", () => {
+            if (music.src.endsWith("/gameover-theme.mp3")) {
+                playing = false;
+                toggle.textContent = "Play Music";
+            }
+        });
+
+        const logoTrigger = document.getElementById("logo-secret-trigger");
+        const miniGame = document.getElementById("secret-mini-game");
+        const miniGameCanvas = document.getElementById("mini-game-canvas");
+        const miniGameContext = miniGameCanvas.getContext("2d");
+        const miniGameScore = document.getElementById("mini-game-score");
+        const miniGameMisses = document.getElementById("mini-game-misses");
+        const miniGameWallet = document.getElementById("mini-game-wallet");
+        const gameOverWallet = document.getElementById("game-over-wallet");
+        const miniGameClose = document.getElementById("mini-game-close");
+        const miniGameOver = document.getElementById("mini-game-game-over");
+        const miniGameFinalScore = document.getElementById("mini-game-final-score");
+        const miniGameFinalTime = document.getElementById("mini-game-final-time");
+        const miniGameScoreForm = document.getElementById("mini-game-score-form");
+        const miniGamePlayerName = document.getElementById("mini-game-player-name");
+        const miniGameSaveScore = document.getElementById("mini-game-save-score");
+        const miniGameScoreStatus = document.getElementById("mini-game-score-status");
+        const miniGameRestart = document.getElementById("mini-game-restart");
+        const miniGameUsePotion = document.getElementById("mini-game-use-potion");
+        const miniGameUseRevive = document.getElementById("mini-game-use-revive");
+        const miraSprite = new Image();
+        const boxArtSprite = new Image();
+        const activeKeys = new Set();
+        const gameKeyCodes = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space"]);
+        let logoClickCount = 0;
+        let miniGameRunning = false;
+        let animationFrame = 0;
+        let lastFrameTime = 0;
+        let gameWidth = 0;
+        let gameHeight = 0;
+        let score = 0;
+        let misses = 0;
+        let runStartedAt = 0;
+        let gameOverDurationMs = 0;
+        let slowMotionEndsAt = 0;
+        let spawnTimer = 0;
+        let collectibles = [];
+        let previousBodyOverflow = "";
+        let player = { x: 0, y: 0, width: 0, height: 0, velocityX: 0, velocityY: 0, onGround: true };
+        const leaderboardStorageKey = "teamruby:box-art-frenzy:leaderboard";
+        const playerNameStorageKey = "teamruby:box-art-frenzy:player-name";
+        const walletStorageKey = "teamruby:box-art-frenzy:wallet";
+        const inventoryStorageKey = "teamruby:box-art-frenzy:inventory";
+
+        miraSprite.src = "assets/pictures/mira.jpg";
+        boxArtSprite.src = "assets/pictures/gallery/chicken/boxart.png";
+
+        function resizeMiniGame() {
+            const bounds = miniGameCanvas.getBoundingClientRect();
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            gameWidth = bounds.width;
+            gameHeight = bounds.height;
+            miniGameCanvas.width = Math.round(gameWidth * pixelRatio);
+            miniGameCanvas.height = Math.round(gameHeight * pixelRatio);
+            miniGameContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+            player.width = Math.min(88, Math.max(54, gameWidth * 0.17));
+            const spriteRatio = miraSprite.naturalWidth && miraSprite.naturalHeight
+                ? miraSprite.naturalHeight / miraSprite.naturalWidth
+                : 1024 / 576;
+            player.height = player.width * spriteRatio;
+            player.x = Math.min(player.x, gameWidth - player.width);
+            player.y = gameHeight - 28 - player.height;
+        }
+
+        miraSprite.addEventListener("load", () => {
+            if (miniGameRunning) resizeMiniGame();
+        });
+
+        function readWallet() {
+            try {
+                const wallet = Number.parseInt(localStorage.getItem(walletStorageKey) || "0", 10);
+                return Number.isFinite(wallet) && wallet >= 0 ? wallet : 0;
+            } catch {
+                return 0;
+            }
+        }
+
+        function readInventory() {
+            try {
+                const inventory = JSON.parse(localStorage.getItem(inventoryStorageKey) || "{}");
+                return {
+                    slowPotions: Number.isInteger(inventory.slowPotions) && inventory.slowPotions > 0 ? inventory.slowPotions : 0,
+                    revives: Number.isInteger(inventory.revives) && inventory.revives > 0 ? inventory.revives : 0
+                };
+            } catch {
+                return { slowPotions: 0, revives: 0 };
+            }
+        }
+
+        function writeInventory(inventory) {
+            try {
+                localStorage.setItem(inventoryStorageKey, JSON.stringify(inventory));
+                syncPlayerInventory();
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        function syncPlayerInventory() {
+            if (!window.TeamRubyAccounts) return;
+            window.TeamRubyAccounts.savePlayerInventory(readWallet(), readInventory()).catch(() => {});
+        }
+
+        function updateShopControls() {
+            const inventory = readInventory();
+            const potionActive = performance.now() < slowMotionEndsAt;
+            const wallet = readWallet();
+            miniGameWallet.textContent = wallet;
+            gameOverWallet.textContent = wallet;
+            miniGameUsePotion.textContent = potionActive
+                ? "Slow Potion Active"
+                : `Use Slow Potion (${inventory.slowPotions})`;
+            miniGameUsePotion.disabled = !miniGameRunning || potionActive || inventory.slowPotions === 0;
+            miniGameUseRevive.textContent = `Use Revive (${inventory.revives})`;
+            miniGameUseRevive.disabled = miniGameRunning || miniGameOver.hidden || inventory.revives === 0;
+        }
+
+        function addBoxBuck() {
+            try {
+                localStorage.setItem(walletStorageKey, String(readWallet() + 1));
+            } catch {
+                return;
+            }
+            updateShopControls();
+            syncPlayerInventory();
+        }
+
+        function useSlowPotion() {
+            if (!miniGameRunning || performance.now() < slowMotionEndsAt) return;
+            const inventory = readInventory();
+            if (inventory.slowPotions === 0) return;
+            inventory.slowPotions -= 1;
+            if (!writeInventory(inventory)) return;
+            slowMotionEndsAt = performance.now() + 7000;
+            updateShopControls();
+            window.setTimeout(updateShopControls, 7100);
+        }
+
+        function useRevive() {
+            if (miniGameRunning || miniGameOver.hidden) return;
+            const inventory = readInventory();
+            if (inventory.revives === 0) return;
+            inventory.revives -= 1;
+            if (!writeInventory(inventory)) return;
+            misses = 3;
+            miniGameMisses.textContent = misses;
+            miniGameOver.hidden = true;
+            miniGameRunning = true;
+            slowMotionEndsAt = 0;
+            runStartedAt = performance.now();
+            lastFrameTime = 0;
+            activeKeys.clear();
+            setMusicTrack(miniGameMusicSource, playing, true);
+            updateShopControls();
+            miniGameClose.focus();
+            animationFrame = requestAnimationFrame(runMiniGameFrame);
+        }
+
+        window.addEventListener("storage", (event) => {
+            if (event.key === walletStorageKey || event.key === inventoryStorageKey || event.key === null) {
+                updateShopControls();
+            }
+        });
+
+        window.addEventListener("team-ruby-inventory-updated", updateShopControls);
+        if (window.TeamRubyAccounts) {
+            window.TeamRubyAccounts.onChange(() => updateShopControls());
+            window.TeamRubyAccounts.initialize().catch(() => {});
+        }
+
+        updateShopControls();
+
+        function startMiniGame() {
+            miniGame.hidden = false;
+            setMusicTrack(miniGameMusicSource, playing, true);
+            previousBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = "hidden";
+            score = 0;
+            misses = 0;
+            collectibles = [];
+            spawnTimer = 0.35;
+            activeKeys.clear();
+            miniGameScore.textContent = score;
+            miniGameMisses.textContent = misses;
+            miniGameFinalScore.textContent = score;
+            gameOverDurationMs = 0;
+            slowMotionEndsAt = 0;
+            miniGameFinalTime.textContent = formatRunDuration(gameOverDurationMs);
+            miniGameScoreStatus.textContent = "";
+            miniGameSaveScore.disabled = false;
+            miniGameOver.hidden = true;
+            miniGamePlayerName.value = getSavedPlayerName();
+            resizeMiniGame();
+            player.x = (gameWidth - player.width) / 2;
+            player.y = gameHeight - 28 - player.height;
+            player.velocityX = 0;
+            player.velocityY = 0;
+            player.onGround = true;
+            runStartedAt = performance.now();
+            miniGameRunning = true;
+            updateShopControls();
+            lastFrameTime = 0;
+            miniGameClose.focus();
+            animationFrame = requestAnimationFrame(runMiniGameFrame);
+        }
+
+        function closeMiniGame() {
+            miniGameRunning = false;
+            cancelAnimationFrame(animationFrame);
+            activeKeys.clear();
+            miniGame.hidden = true;
+            setMusicTrack(siteMusicSource, playing, true);
+            document.body.style.overflow = previousBodyOverflow;
+            updateShopControls();
+            logoTrigger.focus();
+        }
+
+        function getSavedPlayerName() {
+            try {
+                return localStorage.getItem(playerNameStorageKey) || "";
+            } catch {
+                return "";
+            }
+        }
+
+        function formatRunDuration(durationMs) {
+            const elapsedTenths = Math.floor(Math.max(0, durationMs) / 100);
+            const minutes = Math.floor(elapsedTenths / 600);
+            const seconds = ((elapsedTenths % 600) / 10).toFixed(1).padStart(4, "0");
+            return `${minutes}:${seconds}`;
+        }
+
+        function finishMiniGame() {
+            miniGameRunning = false;
+            activeKeys.clear();
+            setMusicTrack(gameOverMusicSource, playing, false);
+            gameOverDurationMs = Math.max(0, performance.now() - runStartedAt);
+            miniGameFinalScore.textContent = score;
+            miniGameFinalTime.textContent = formatRunDuration(gameOverDurationMs);
+            miniGameOver.hidden = false;
+            updateShopControls();
+            miniGamePlayerName.focus();
+        }
+
+        function pressGameKey(code) {
+            if (activeKeys.has(code)) return;
+            activeKeys.add(code);
+            if ((code === "Space" || code === "ArrowUp") && player.onGround) {
+                player.velocityY = -Math.max(440, gameHeight * 0.95);
+                player.onGround = false;
+            }
+        }
+
+        function spawnCollectible() {
+            const width = Math.min(82, Math.max(56, gameWidth * 0.16));
+            const coverRatio = boxArtSprite.naturalWidth && boxArtSprite.naturalHeight
+                ? boxArtSprite.naturalHeight / boxArtSprite.naturalWidth
+                : 371 / 555;
+            const height = width * coverRatio;
+            collectibles.push({
+                x: Math.random() * Math.max(0, gameWidth - width),
+                y: -height,
+                width,
+                height,
+                speed: 115 + Math.min(score * 5, 190)
+            });
+        }
+
+        function drawMiniGame(deltaTime) {
+            const context = miniGameContext;
+            const groundY = gameHeight - 28;
+            const sky = context.createLinearGradient(0, 0, 0, gameHeight);
+            sky.addColorStop(0, "#a8e4ff");
+            sky.addColorStop(1, "#effbff");
+            context.fillStyle = sky;
+            context.fillRect(0, 0, gameWidth, gameHeight);
+
+            context.fillStyle = "rgba(255, 255, 255, 0.8)";
+            for (let cloud = 0; cloud < 5; cloud++) {
+                const cloudX = ((cloud * 193 + 50) % (gameWidth + 180)) - 90;
+                const cloudY = 62 + (cloud % 3) * 76;
+                context.beginPath();
+                context.ellipse(cloudX, cloudY, 42, 13, 0, 0, Math.PI * 2);
+                context.ellipse(cloudX - 20, cloudY + 2, 17, 12, 0, 0, Math.PI * 2);
+                context.ellipse(cloudX + 15, cloudY - 6, 22, 17, 0, 0, Math.PI * 2);
+                context.fill();
+            }
+
+            const moveDirection = Number(activeKeys.has("ArrowRight")) - Number(activeKeys.has("ArrowLeft"));
+            player.velocityX = moveDirection * Math.max(190, gameWidth * 0.72);
+            player.x += player.velocityX * deltaTime;
+            player.x = Math.max(0, Math.min(gameWidth - player.width, player.x));
+
+            player.velocityY += 1250 * deltaTime * (activeKeys.has("ArrowDown") && !player.onGround ? 1.6 : 1);
+            player.y += player.velocityY * deltaTime;
+            if (player.y + player.height >= groundY) {
+                player.y = groundY - player.height;
+                player.velocityY = 0;
+                player.onGround = true;
+            }
+
+            spawnTimer -= deltaTime;
+            if (spawnTimer <= 0) {
+                spawnCollectible();
+                spawnTimer = Math.max(0.48, 1.05 - score * 0.012);
+            }
+
+            context.fillStyle = "#65ad4f";
+            context.fillRect(0, groundY, gameWidth, gameHeight - groundY);
+            context.fillStyle = "#8ed15d";
+            context.fillRect(0, groundY, gameWidth, 7);
+
+            const slowMotionMultiplier = performance.now() < slowMotionEndsAt ? 0.4 : 1;
+            collectibles = collectibles.filter((item) => {
+                item.y += item.speed * deltaTime * slowMotionMultiplier;
+                const collected = player.x < item.x + item.width
+                    && player.x + player.width > item.x
+                    && player.y < item.y + item.height
+                    && player.y + player.height > item.y;
+                if (collected) {
+                    score += 1;
+                    miniGameScore.textContent = score;
+                    addBoxBuck();
+                    return false;
+                }
+                if (item.y > gameHeight) {
+                    misses += 1;
+                    miniGameMisses.textContent = misses;
+                    return false;
+                }
+                if (boxArtSprite.complete && boxArtSprite.naturalWidth) {
+                    context.drawImage(boxArtSprite, item.x, item.y, item.width, item.height);
+                }
+                return true;
+            });
+
+            if (miraSprite.complete && miraSprite.naturalWidth) {
+                context.drawImage(miraSprite, player.x, player.y, player.width, player.height);
+            }
+        }
+
+        function runMiniGameFrame(time) {
+            if (!miniGameRunning) return;
+            const deltaTime = Math.min((time - (lastFrameTime || time)) / 1000, 0.04);
+            lastFrameTime = time;
+            drawMiniGame(deltaTime);
+            if (misses >= 5) {
+                finishMiniGame();
+                return;
+            }
+            animationFrame = requestAnimationFrame(runMiniGameFrame);
+        }
+
+        miniGameScoreForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const name = miniGamePlayerName.value.trim().slice(0, 16);
+            if (!name) {
+                miniGameScoreStatus.textContent = "Enter a name to save your score.";
+                miniGamePlayerName.focus();
+                return;
+            }
+            if (!window.isAllowedPlayerName(name)) {
+                miniGameScoreStatus.textContent = "That name is not allowed. Please choose another.";
+                miniGamePlayerName.focus();
+                return;
+            }
+
+            try {
+                const savedScores = JSON.parse(localStorage.getItem(leaderboardStorageKey) || "[]");
+                const scores = Array.isArray(savedScores) ? savedScores : [];
+                scores.push({ name, score, durationMs: Math.round(gameOverDurationMs), date: new Date().toISOString() });
+                scores.sort((first, second) => second.score - first.score || first.date.localeCompare(second.date));
+                localStorage.setItem(leaderboardStorageKey, JSON.stringify(scores.slice(0, 10)));
+                localStorage.setItem(playerNameStorageKey, name);
+                miniGameScoreStatus.textContent = "Score saved to your leaderboard.";
+                miniGameSaveScore.disabled = true;
+            } catch {
+                miniGameScoreStatus.textContent = "This browser could not save scores. Try the hosted site instead of opening the file directly.";
+            }
+        });
+
+        miniGameRestart.addEventListener("click", startMiniGame);
+        miniGameUsePotion.addEventListener("click", useSlowPotion);
+        miniGameUseRevive.addEventListener("click", useRevive);
+
+        logoTrigger.addEventListener("click", () => {
+            logoClickCount += 1;
+            if (logoClickCount >= 10) {
+                logoClickCount = 0;
+                startMiniGame();
+            }
+        });
+
+        miniGameClose.addEventListener("click", closeMiniGame);
+
+        document.addEventListener("keydown", (event) => {
+            if (!miniGameRunning) return;
+            if (event.key === "Escape") {
+                closeMiniGame();
+                return;
+            }
+            if (gameKeyCodes.has(event.code)) {
+                event.preventDefault();
+                pressGameKey(event.code);
+            }
+        });
+
+        document.addEventListener("keyup", (event) => {
+            if (gameKeyCodes.has(event.code)) {
+                activeKeys.delete(event.code);
+                if (miniGameRunning) event.preventDefault();
+            }
+        });
+
+        document.querySelectorAll(".game-control").forEach((button) => {
+            const code = button.dataset.gameKey;
+            button.addEventListener("pointerdown", (event) => {
+                event.preventDefault();
+                if (!miniGameRunning) return;
+                button.setPointerCapture(event.pointerId);
+                pressGameKey(code);
+            });
+            ["pointerup", "pointercancel", "lostpointercapture"].forEach((eventName) => {
+                button.addEventListener(eventName, () => activeKeys.delete(code));
+            });
+        });
+
+        window.addEventListener("resize", () => {
+            if (miniGameRunning) resizeMiniGame();
+        });
+
+        window.addEventListener("blur", () => activeKeys.clear());
     </script>
 
+    <script src="assets/js/vhs-toggle.js"></script>
 </body>
 </html>
 

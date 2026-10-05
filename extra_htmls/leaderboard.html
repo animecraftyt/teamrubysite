@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Art Frenzy Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("../assets/pictures/codebg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #111;
+            overflow-x: hidden;
+        }
+
+        .header-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 40px;
+            padding: 5px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+            height: 120px;
+        }
+
+        .header-bar img {
+            height: 150px;
+        }
+
+        .home-link {
+            color: #b30000;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        #music-toggle {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 2000;
+            padding: 10px 20px;
+            border: 0;
+            border-radius: 8px;
+            background: #b30000;
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 180px 20px 60px;
+        }
+
+        h1 {
+            color: #b30000;
+            margin-bottom: 8px;
+        }
+
+        .leaderboard-panel h2 {
+            margin: 0 0 14px;
+            color: #b30000;
+            font-size: 22px;
+        }
+
+        .subtitle {
+            margin-bottom: 26px;
+            font-size: 17px;
+        }
+
+        .leaderboard-panel {
+            padding: 22px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            text-align: left;
+        }
+
+        .leaderboard-table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+            text-align: left;
+        }
+
+        th {
+            color: #b30000;
+        }
+
+        td:first-child,
+        th:first-child {
+            width: 72px;
+        }
+
+        td:last-child,
+        th:last-child {
+            text-align: right;
+            width: 100px;
+        }
+
+        .empty-state {
+            padding: 20px 0 4px;
+            color: #555;
+            text-align: center;
+        }
+
+        .score-note {
+            margin-top: 18px;
+            color: #555;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .header-bar {
+                height: auto;
+                min-height: 84px;
+                padding: 8px 12px;
+                gap: 12px;
+                box-sizing: border-box;
+            }
+
+            .header-bar img {
+                height: 70px;
+            }
+
+            .home-link {
+                font-size: 15px;
+            }
+
+            .content {
+                padding: 130px 12px 48px;
+            }
+
+            #music-toggle {
+                right: 10px;
+                bottom: 10px;
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .leaderboard-panel {
+                padding: 14px 10px;
+            }
+
+            th,
+            td {
+                padding: 10px 6px;
+                font-size: 14px;
+            }
+
+            td:first-child,
+            th:first-child {
+                width: 48px;
+            }
+
+            td:last-child,
+            th:last-child {
+                width: 70px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/vhs.css">
+</head>
+<body>
+    <header class="header-bar">
+        <img src="../assets/pictures/logo.png" alt="Team Ruby Logo">
+        <a class="home-link" href="../index.html">Home</a>
+    </header>
+
+    <button id="music-toggle" type="button">Play Music</button>
+    <audio id="bg-music" src="../assets/audio/leaderborad-music.mp3" loop></audio>
+
+    <main class="content">
+        <h1>Box Art Frenzy Leaderboard</h1>
+        <p class="subtitle">Top scores saved in this browser.</p>
+
+        <section class="leaderboard-panel" aria-label="Box Art Frenzy top scores">
+            <h2>Highest Scores</h2>
+            <div class="leaderboard-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Player</th>
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-entries"></tbody>
+                </table>
+            </div>
+            <p id="leaderboard-empty" class="empty-state" hidden>No scores yet. Play Box Art Frenzy and save your score!</p>
+            <p id="leaderboard-status" class="score-note" aria-live="polite">Scores are stored locally in your browser.</p>
+        </section>
+
+        <section class="leaderboard-panel" aria-label="Fastest Box Art Frenzy game overs">
+            <h2>Fastest Game Overs</h2>
+            <div class="leaderboard-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Rank</th>
+                            <th scope="col">Player</th>
+                            <th scope="col">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fastest-entries"></tbody>
+                </table>
+            </div>
+            <p id="fastest-empty" class="empty-state" hidden>No timed runs yet. Reach game over and save your score to set a time.</p>
+        </section>
+    </main>
+
+    <script src="../assets/js/player-name-filter.js"></script>
+    <script>
+        const music = document.getElementById("bg-music");
+        const musicToggle = document.getElementById("music-toggle");
+        let musicPlaying = false;
+
+        musicToggle.addEventListener("click", () => {
+            if (musicPlaying) {
+                music.pause();
+                musicToggle.textContent = "Play Music";
+                musicPlaying = false;
+            } else {
+                music.play().catch(() => {
+                    musicToggle.textContent = "Play Music";
+                });
+                musicToggle.textContent = "Pause Music";
+                musicPlaying = true;
+            }
+        });
+
+        const storageKey = "teamruby:box-art-frenzy:leaderboard";
+        const entriesContainer = document.getElementById("leaderboard-entries");
+        const emptyState = document.getElementById("leaderboard-empty");
+        const fastestEntriesContainer = document.getElementById("fastest-entries");
+        const fastestEmptyState = document.getElementById("fastest-empty");
+        const status = document.getElementById("leaderboard-status");
+
+        function addCell(row, value, className) {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            if (className) cell.className = className;
+            row.appendChild(cell);
+        }
+
+        function formatDuration(durationMs) {
+            const elapsedTenths = Math.floor(durationMs / 100);
+            const minutes = Math.floor(elapsedTenths / 600);
+            const seconds = ((elapsedTenths % 600) / 10).toFixed(1).padStart(4, "0");
+            return `${minutes}:${seconds}`;
+        }
+
+        try {
+            const storedEntries = JSON.parse(localStorage.getItem(storageKey) || "[]");
+            const validEntries = Array.isArray(storedEntries)
+                ? storedEntries
+                    .filter((entry) => entry && typeof entry.name === "string" && Number.isFinite(entry.score) && window.isAllowedPlayerName(entry.name))
+                : [];
+            const entries = [...validEntries]
+                .sort((first, second) => second.score - first.score || String(first.date).localeCompare(String(second.date)))
+                .slice(0, 10);
+            const fastestEntries = validEntries
+                .filter((entry) => Number.isFinite(entry.durationMs) && entry.durationMs >= 0)
+                .sort((first, second) => first.durationMs - second.durationMs || String(first.date).localeCompare(String(second.date)))
+                .slice(0, 10);
+
+            emptyState.hidden = entries.length > 0;
+            fastestEmptyState.hidden = fastestEntries.length > 0;
+            entries.forEach((entry, index) => {
+                const row = document.createElement("tr");
+                addCell(row, String(index + 1));
+                addCell(row, entry.name);
+                addCell(row, String(entry.score));
+                entriesContainer.appendChild(row);
+            });
+            fastestEntries.forEach((entry, index) => {
+                const row = document.createElement("tr");
+                addCell(row, String(index + 1));
+                addCell(row, entry.name);
+                addCell(row, formatDuration(entry.durationMs));
+                fastestEntriesContainer.appendChild(row);
+            });
+        } catch {
+            emptyState.hidden = false;
+            emptyState.textContent = "Scores are unavailable in this browser. Open the hosted site to use the leaderboard.";
+            fastestEmptyState.hidden = false;
+            fastestEmptyState.textContent = "Timed runs are unavailable in this browser.";
+            status.textContent = "This browser does not allow local score storage for this page.";
+        }
+    </script>
+    <script src="../assets/js/vhs-toggle.js"></script>
+</body>
+</html>

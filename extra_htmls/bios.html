@@ -104,6 +104,34 @@
 			outline-offset: 4px;
 		}
 
+		.bio-portrait-column {
+			width: 100%;
+			min-width: 0;
+		}
+
+		.secret-game-hint {
+			max-width: 300px;
+			margin: 12px auto 0;
+			padding: 9px 11px;
+			border-left: 3px solid #b30000;
+			border-radius: 4px;
+			background: rgba(255, 255, 255, 0.94);
+			color: #111;
+			font-size: 14px;
+			line-height: 1.45;
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(4px);
+			transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms;
+		}
+
+		.secret-game-hint.visible {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+			transition-delay: 0s;
+		}
+
 		.lightbox {
 			position: fixed;
 			inset: 0;
@@ -233,6 +261,11 @@
 				margin: 0 auto;
 			}
 
+			.bio-portrait-column {
+				max-width: 300px;
+				margin: 0 auto;
+			}
+
 			.bio-details p,
 			.bio-details li {
 				font-size: 16px;
@@ -254,7 +287,14 @@
 				right: 10px;
 			}
 		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.secret-game-hint {
+				transition: none;
+			}
+		}
 	</style>
+	<link rel="stylesheet" href="../assets/css/vhs.css">
 </head>
 <body>
 	<div class="header-bar">
@@ -272,9 +312,12 @@
 		<p class="tagline">Meet Mira, the fox girl who will save the world.</p>
 
 		<section class="bio-card" aria-label="Mira Bluetail's character bio">
-			<button class="bio-image-button" type="button" aria-label="View Mira's picture full screen" aria-haspopup="dialog">
-				<img class="bio-image" src="../assets/pictures/mira.jpg" alt="Mira Bluetail, an orange fox girl with blue accents">
-			</button>
+			<div class="bio-portrait-column">
+				<button class="bio-image-button" type="button" aria-label="View Mira's picture full screen" aria-haspopup="dialog">
+					<img class="bio-image" src="../assets/pictures/mira.jpg" alt="Mira Bluetail, an orange fox girl with blue accents">
+				</button>
+				<p id="secret-game-hint" class="secret-game-hint" aria-hidden="true">Click the Team Ruby logo on the home page 10 times to play Box Art Frenzy.</p>
+			</div>
 			<div class="bio-details">
 				<dl class="bio-facts">
 					<dt>Name</dt><dd>Mira Bluetail</dd>
@@ -315,6 +358,7 @@
 		const lightbox = document.getElementById("lightbox");
 		const lightboxImage = document.getElementById("lightbox-image");
 		const closeButton = document.querySelector(".lightbox-close");
+		const secretGameHint = document.getElementById("secret-game-hint");
 		let playing = false;
 		let previousBodyOverflow = "";
 
@@ -329,6 +373,15 @@
 				playing = false;
 			}
 		});
+
+		window.setInterval(() => {
+			secretGameHint.classList.add("visible");
+			secretGameHint.setAttribute("aria-hidden", "false");
+			window.setTimeout(() => {
+				secretGameHint.classList.remove("visible");
+				secretGameHint.setAttribute("aria-hidden", "true");
+			}, 4000);
+		}, 10000);
 
 		function openLightbox() {
 			previousBodyOverflow = document.body.style.overflow;
@@ -363,5 +416,6 @@
 			}
 		});
 	</script>
+	<script src="../assets/js/vhs-toggle.js"></script>
 </body>
 </html>
