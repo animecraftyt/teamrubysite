@@ -204,11 +204,11 @@ function showHelp() {
 
 function showDemos() {
     printLine("Available Web Demos:");
-    printLine("  amy        - playable (no mobile controls)");
-    printLine("  honk       - playable (mobile controls built-in)");
-    printLine("  stickman   - playable (mobile controls built-in)");
-    printLine("  chicken    - playable (controller support)");
-    printLine("  unstable   - playable (no mobile controls)");
+    printLine("  amy        - not ready (no mobile controls)");
+    printLine("  honk       - not ready (mobile controls built-in)");
+    printLine("  stickman   - playble (mobile controls built-in)");
+    printLine("  chicken    - not ready (controller support)");
+    printLine("  unstable   - not ready (no mobile controls)");
     printLine("");
 }
 
@@ -218,26 +218,26 @@ function launchDemo(name) {
     switch (name) {
         case "amy":
             printLine("Launching Amy’s Epic Adventure...");
-            printLine("Note: No mobile controls.");
-            path = "web-demos/amy-game/index.html";
+            printLine("failed.");
+            
             break;
 
         case "chicken":
             printLine("Launching Chicken Shooter 64...");
-            printLine("Controller support detected.");
-            path = "web-demos/chicken-game/index.html";
+            printLine("failed.");
+           
             break;
 
         case "honk":
             printLine("Launching Unexpected Honk...");
-            printLine("Mobile controls enabled.");
-            path = "web-demos/honk-game/index.html";
+            printLine("failed.");
+            
             break;
 
         case "stickman":
             printLine("Launching Stickman Adventure...");
             printLine("Mobile controls enabled.");
-            path = "web-demos/stickman-game/index.html";
+            path = "teamrubysite/stickman-game/index.html";
             break;
 
         case "unstable":
