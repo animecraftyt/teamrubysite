@@ -159,7 +159,6 @@
             z-index: 2000;
         }
 
-        /* Mystery message hover effect */
         #mystery-message:hover {
             cursor: pointer;
             text-decoration: underline;
@@ -183,6 +182,7 @@
         <a href="#socials">Socials</a>
         <a href="#gameslist">Projects</a>
         <a href="#oldsites">Old Sites</a>
+        <a href="console/index.html">Dev Console</a>
     </div>
 
     <div class="hamburger" id="hamburger">
@@ -201,6 +201,7 @@
     <a href="#socials">Socials</a>
     <a href="#gameslist">Projects</a>
     <a href="#oldsites">Old Sites</a>
+    <a href="console/index.html">Dev Console</a>
 </div>
 
 <button id="music-toggle">Play Music</button>
@@ -211,13 +212,11 @@
 <h1>Welcome to Team Ruby!</h1>
 <p>We’re a small indie game studio creating colorful, retro‑inspired games.</p>
 
-<!-- CLICKABLE MYSTERY MESSAGE -->
 <div id="mystery-message" style="color:#b30000; font-size:20px; font-weight:bold; margin-top:20px;">
     Something is coming for everyone…<br>
     It could be something bad or something good… who knows and also have you tried being in the bios part of the website for 10 or 20 seconds?.
 </div>
 
-<!-- SCROLL SCRIPT -->
 <script>
 document.getElementById("mystery-message").addEventListener("click", () => {
     document.getElementById("countdown-target").scrollIntoView({
@@ -240,16 +239,16 @@ document.getElementById("mystery-message").addEventListener("click", () => {
 <div class="section-box">
     <h3>Original Games</h3>
     <ul>
-        <li><a href="#stickman">Stickman Adventure</a></li>
-        <li><a href="#unexpectedhonk">Unexpected Honk Has Occurred</a></li>
-        <li><a href="#chickenshooter">Chicken Shooter 64</a></li>
+        <li><a href="https://gamejolt.com/games/Stickgb/1092767" target="_blank">Stickman Adventure</a></li>
+        <li><a href="https://gamejolt.com/games/goose-virus/1102641" target="_blank">Unexpected Honk Has Occurred</a></li>
+        <li><a href="https://gamejolt.com/games/n64-cartrige-cs64-play/1086515" target="_blank">Chicken Shooter 64</a></li>
     </ul>
 </div>
 
 <div class="section-box">
     <h3>Fan Games</h3>
     <ul>
-        <li><a href="#amy-adventure">Amy’s Epic Adventure</a></li>
+        <li><a href="https://gamejolt.com/games/Normal-fangame/1068271" target="_blank">Amy’s Epic Adventure</a></li>
     </ul>
 </div>
 
@@ -325,27 +324,20 @@ document.getElementById("mystery-message").addEventListener("click", () => {
     </ul>
 </div>
 
+<!--part 2 of my script-->
+    
 <h2 id="oldsites">Old Site Versions</h2>
 <div class="section-box">
     <p><a href="https://6aa1d3285f602.site123.me/" target="_blank">Old Site Version 2</a></p>
     <p><a href="https://animecraft64ytpage.tiiny.site/" target="_blank">Old Site Version 1</a></p>
 </div>
 
-
-<!-- part 2 of my script-->
-
-<!-- COUNTDOWN SCROLL TARGET -->
+<!-- COUNTDOWN TARGET -->
 <div id="countdown-target"></div>
 
-<!-- COUNTDOWN ABOVE SITE VIEWS -->
 <h2>Countdown</h2>
 <div class="section-box">
-    <div id="countdown" style="
-        font-size: 22px;
-        color: #b30000;
-        font-weight: bold;
-        padding: 10px;
-    ">
+    <div id="countdown" style="font-size:22px;color:#b30000;font-weight:bold;padding:10px;">
         Loading countdown…
     </div>
 </div>
@@ -357,7 +349,6 @@ document.getElementById("mystery-message").addEventListener("click", () => {
 
 </div> <!-- END CONTENT -->
 
-<!-- JS -->
 <script>
 const hamburger = document.getElementById("hamburger");
 const mobileMenu = document.getElementById("mobile-menu");
@@ -386,21 +377,20 @@ toggle.addEventListener("click", () => {
 <script src="assets/js/vhs-toggle.js"></script>
 
 <script>
-// === SECRET DEV CONSOLE UNLOCK ===
+// SECRET DEV CONSOLE UNLOCK
 let logoClicks = 0;
 const logo = document.querySelector(".header-bar img");
 
 logo.addEventListener("click", () => {
     logoClicks++;
     if (logoClicks === 10) {
-        window.location.href = "/extra_htmls/console.html";
+        window.location.href = "console/index.html";
     }
 });
 </script>
 
 <script>
-// === 5 MONTH COUNTDOWN LOGIC ===
-
+// 5 MONTH COUNTDOWN LOGIC
 const now = new Date();
 const countdownEnd = new Date(now.getFullYear(), now.getMonth() + 5, now.getDate());
 
@@ -408,7 +398,7 @@ const mysteryMessage = document.getElementById("mystery-message");
 
 const navLinks = document.querySelector(".nav-links");
 const consoleLink = document.createElement("a");
-consoleLink.href = "extrahtmls/console.html";
+consoleLink.href = "console/index.html";
 consoleLink.textContent = "Dev Console";
 consoleLink.style.display = "none";
 navLinks.appendChild(consoleLink);
@@ -425,8 +415,7 @@ checkCountdown();
 </script>
 
 <script>
-// === VISIBLE COUNTDOWN WITH SECONDS + MILLISECONDS ===
-
+// VISIBLE COUNTDOWN WITH MS
 function updateVisibleCountdown() {
     const countdownBox = document.getElementById("countdown");
     const now = new Date();
@@ -449,11 +438,12 @@ function updateVisibleCountdown() {
         `Time Remaining: ${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
 }
 
-// Update 20 times per second
 updateVisibleCountdown();
 setInterval(updateVisibleCountdown, 50);
 </script>
 
 </body>
+</html>
+
 </html>
 
