@@ -163,6 +163,42 @@
             cursor: pointer;
             text-decoration: underline;
         }
+
+        /* MOBILE PATCH CSS */
+        @media (max-width: 600px) {
+            .header-bar {
+                display: none;
+            }
+            #mobile-access {
+                display: block;
+            }
+        }
+
+        #mobile-access {
+            display: none;
+            margin-top: 160px;
+        }
+
+        #mobile-access .section-box {
+            background: rgba(255, 255, 255, 0.95);
+            width: 85%;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #mobile-access a {
+            display: block;
+            padding: 12px;
+            font-size: 18px;
+            color: #b30000;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        #mobile-access a:hover {
+            background: #ffe5e5;
+        }
     </style>
 
     <link rel="stylesheet" href="assets/css/vhs.css">
@@ -183,7 +219,6 @@
         <a href="#gameslist">Projects</a>
         <a href="#oldsites">Old Sites</a>
 
-        <!-- Hidden Dev Console link (desktop) -->
         <a id="devConsoleLink" href="console/index.html" style="display:none;">Dev Console</a>
     </div>
 
@@ -203,8 +238,6 @@
     <a href="#socials">Socials</a>
     <a href="#gameslist">Projects</a>
     <a href="#oldsites">Old Sites</a>
-
-    <!-- Hidden Dev Console link (mobile) -->
     <a id="devConsoleLinkMobile" href="console/index.html" style="display:none;">Dev Console</a>
 </div>
 
@@ -213,8 +246,7 @@
 
 <div class="content">
 
-<h1>Welcome to Team Ruby!</h1>
-<p>We’re a small indie game studio creating colorful, retro‑inspired games.</p>
+<h1>Welcome to the Team Ruby website!</h1>
 
 <div id="mystery-message" style="color:#b30000; font-size:20px; font-weight:bold; margin-top:20px;">
     Something is coming for everyone…<br>
@@ -229,7 +261,160 @@ document.getElementById("mystery-message").addEventListener("click", () => {
 });
 </script>
 
-<!-- CONTENT OMITTED FOR BREVITY (your game sections, etc.) -->
+<!-- ⭐ MOBILE PATCH VISUAL PART (PLACED ABOVE DEVLOGS) -->
+<div id="mobile-access" style="display:none;">
+    <div class="section-box">
+        <h2>Mobile Navigation</h2>
+
+        <a href="extra_htmls/devlog.html">Devlogs</a>
+        <a href="extra_htmls/bios.html">Bios</a>
+        <a href="#games">Games</a>
+        <a href="extra_htmls/gallery.html">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#socials">Socials</a>
+        <a href="#gameslist">Projects</a>
+        <a href="#oldsites">Old Sites</a>
+
+        <a id="devConsoleLinkMobile" href="console/index.html" style="display:none;">Dev Console</a>
+    </div>
+</div>
+
+<!-- Your original Devlogs section continues here -->
+<h2 id="devlogs">Devlogs</h2>
+<div class="section-box">
+    <p><a href="extra_htmls/devlog.html">Click me to see the devlogs</a></p>
+</div>
+
+    <h2 id="bios">Bios</h2>
+<div class="section-box">
+    <p><a href="extra_htmls/bios.html">Click me to see the bios</a></p>
+</div>
+
+<h2 id="games">Games</h2>
+<div class="section-box">
+    <h3>Original Games</h3>
+    <ul>
+        <li><a href="#stickman">Stickman Adventure</a></li>
+        <li><a href="#unexpectedhonk">Unexpected Honk Has Occurred</a></li>
+        <li><a href="#chickenshooter">Chicken Shooter 64</a></li>
+    </ul>
+</div>
+
+<div class="section-box">
+    <h3>Fan Games</h3>
+    <ul>
+        <li><a href="#amy-adventure">Amy’s Epic Adventure</a></li>
+    </ul>
+</div>
+
+<!--part 2 of my script-->
+    
+    <!-- Amy -->
+<div class="section-box" id="amy-adventure">
+    <h2>Amy’s Epic Adventure</h2>
+
+    <p><strong>Genre:</strong> Platformer</p>
+    <p><strong>Rating:</strong> All Ages</p>
+    <p><strong>Content:</strong> Mild Fantasy Violence, Comical Shenanigans</p>
+
+    <h3>Description</h3>
+    <p>A normal fangame staring Amy rose
+        use arrow keys to move z x c for jumping and abilltys p is to pause
+NOTE amy and the boss fight are not ready yet or finshing fallen frontier zone give a trophy yet (zone trophy comeing next update)</p>
+
+    <h3>Soundtrack</h3>
+    <p><a href="https://drive.google.com/file/d/1KNocnhA2-tJUfSKqTl6JAy-WnFwdB6IJ/view?usp=drivesdk" target="_blank">Click here to listen</a></p>
+</div>
+
+<!-- Chicken Shooter -->
+<div class="section-box" id="chickenshooter">
+    <h2>Chicken Shooter 64</h2>
+
+    <p><strong>Genre:</strong> First‑Person Shooter</p>
+    <p><strong>Rating:</strong> All Ages</p>
+    <p><strong>Content:</strong> Fantasy Violence, Comical Shenanigans</p>
+
+    <h3>Description</h3>
+    <p>Meet Mira Bluetail — the cheerful fox heroine of a world gone to war! When a flock of chickens suddenly arm themselves with knives and declare war on the world, Mira will have her trusty shotgun and leap into the action.
+In this epic adventure you’ll explore bright, blocky landscapes, dodge wild chicken attacks, and blast through waves of feathery foes in fast, silly, over‑the‑top battles. Mira’s light‑blue dress may look cute, but don’t let it fool you — she’s quick, clever, and ready to take on any poultry uprising that comes her way.
+Can Mira Bluetail restore peace to her land, or will the chickens rule the world?
+this is a fight like you’ve never seen before.
+grab a copy at your local video game store to find out</p>
+
+    <h3>Trailer</h3>
+    <iframe src="https://player.vimeo.com/video/1228200794?h=ba91138ea7" width="640" height="360"></iframe>
+</div>
+
+<!-- Unexpected Honk -->
+<div class="section-box" id="unexpectedhonk">
+    <h2>Unexpected Honk Has Occurred</h2>
+
+    <p><strong>Genre:</strong> Visual Novel</p>
+    <p><strong>Rating:</strong> All Ages</p>
+
+    <h3>Description</h3>
+    <p>this game is a short, experimental Ren’Py game created by Team Ruby. This demo was made in just 3 days, so expect something small, weird, glitchy… and a little chaotic.
+You begin the game normally, choosing your name and preparing to play — until a strange “Goose Virus” takes over your screen. Before you can react, an AI named [readacted] appears, trying to stop the corruption before it spreads to your game.
+But the Goose Virus doesn’t want to let go.
+As the player, you’ll make a single important choice:
+Try to help her delete the Goose Virus
+Say nothing and let the game close itself
+Your decision determines whether the loop continues… or breaks.
+This demo includes:
+A short interactive story
+Glitch effects and corrupted visuals
+Two different endings (Good Ending & Bad Ending)
+This is only the beginning.
+More content,  and a full story will be added in future updates.
+Thank you for playing, supporting team ruby, and being part of the loop. Can you break it?</p>
+</div>
+
+<!-- Stickman -->
+<div class="section-box" id="stickman">
+    <h2>Stickman Adventure</h2>
+
+    <p><strong>Genre:</strong> Open‑World Platformer</p>
+    <p><strong>Rating:</strong> All Ages</p>
+    <p><strong>Content:</strong> Mild Cartoon Violence</p>
+
+    <h3>Description</h3>
+    <p>Step into a retro open-world journey Explore vast interconnected regions, from rugged mountains and mysterious forests to a city and hidden caves. Make choices that shape your path, discover secret codes left in the prototype and demo, and test your survival skills in a classic 8-bit handheld adventure.
+Explore an Open World: Choose your own paths, travel between unique areas like the mountains and woods, and uncover hidden routes.
+Secrets & Modes: Track down hidden codes in the prototype and demo to unlock secret modes and custom features!
+Secret mode hint the prototype will have 2 codes use both and unlock infinite lives and no timer to stop you this mode is called easy mode
+Save and load at will via going back to the title
+(Will be replaced by auto saving)</p>
+</div>
+
+<h2 id="socials">Socials</h2>
+<div class="section-box">
+    <p><a href="https://gamejolt.com/c/ruby-y5ym9k" target="_blank">Game Jolt Community</a></p>
+    <p><a href="https://gamejolt.com/@animecraft64YT" target="_blank">My Game Jolt Profile</a></p>
+</div>
+
+<h2 id="gallery">Gallery</h2>
+<div class="section-box">
+    <p><a href="extra_htmls/gallery.html">Click me to see the gallery</a></p>
+</div>
+
+<h2 id="gameslist">All Games</h2>
+<div class="section-box">
+    <ul>
+        <li><strong>Original Games</strong></li>
+        <li>Stickman Adventure</li>
+        <li>Unexpected Honk Has Occurred</li>
+        <li>Chicken Shooter 64</li>
+        <br>
+        <li><strong>Fan Games</strong></li>
+        <li>Amy’s Epic Adventure</li>
+    </ul>
+</div>
+
+<h2 id="about">About Team Ruby</h2>
+<div class="section-box">
+    <p>Team Ruby is a small indie game development group creating fun, retro‑inspired projects. Right now, it’s a solo-run studio building games, learning, and experimenting with new ideas. We focus on low‑poly or 2D worlds, with simple or hard gameplay, and creative ideas that feel like classic games with a modern twist.
+Our current projects include Chicken Shooter 64, Amy’s Epic Adventure, Unexpected Honk Has Occurred and Stickman Adventure. We’re all about experimenting, learning, and making games that are colorful, weird, and full of personality. As the projects grow, the goal is to keep building Team Ruby into something bigger and stronger.</p>
+</div>
 
 <h2 id="oldsites">Old Site Versions</h2>
 <div class="section-box">
@@ -237,7 +422,10 @@ document.getElementById("mystery-message").addEventListener("click", () => {
     <p><a href="https://animecraft64ytpage.tiiny.site/" target="_blank">Old Site Version 1</a></p>
 </div>
 
-<!-- COUNTDOWN TARGET -->
+
+<!--part 3 of my script-->
+    
+    <!-- COUNTDOWN TARGET -->
 <div id="countdown-target"></div>
 
 <h2>Countdown</h2>
@@ -246,7 +434,7 @@ document.getElementById("mystery-message").addEventListener("click", () => {
         Loading countdown…
     </div>
 </div>
-<!--part 2 of my script-->
+
 <h2>Site Views</h2>
 <div class="section-box">
     <img src="https://api.visitorbadge.io/api/visitors?path=teamruby-site-views-animecraft64yt&label=Site%20Views&labelColor=%23b30000&countColor=%23ffffff&style=flat">
@@ -305,15 +493,12 @@ function checkCountdown() {
     const today = new Date();
     if (today >= countdownEnd) {
 
-        // Reveal desktop console link
         const desktopLink = document.getElementById("devConsoleLink");
         if (desktopLink) desktopLink.style.display = "inline-block";
 
-        // Reveal mobile console link
         const mobileLink = document.getElementById("devConsoleLinkMobile");
         if (mobileLink) mobileLink.style.display = "block";
 
-        // Hide mystery message
         if (mysteryMessage) mysteryMessage.style.display = "none";
     }
 }
@@ -349,7 +534,26 @@ updateVisibleCountdown();
 setInterval(updateVisibleCountdown, 50);
 </script>
 
+<!-- ⭐ MOBILE SCRIPT PATCH -->
+<script>
+function applyMobilePatch() {
+    const isMobile = window.innerWidth <= 600;
+
+    if (isMobile) {
+        const header = document.querySelector(".header-bar");
+        if (header) header.style.display = "none";
+
+        const mobileNav = document.getElementById("mobile-access");
+        if (mobileNav) mobileNav.style.display = "block";
+    }
+}
+
+applyMobilePatch();
+</script>
+
 </body>
 </html>
+
+
 
 
